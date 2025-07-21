@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+
+/* 네비게이션 전체 */
+.navbar {
+  position: fixed;         /* 상단 고정 */
+  top: 0;                  /* 위에서 0px */
+  left: 0;
+  width: 100%;             /* 전체 너비 */
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);  /* 살짝 그림자 */
+  z-index: 999;            /* 다른 요소보다 위 */
+}
+
+/* 메뉴 리스트 */
+.nav {
+  display: flex;
+  justify-content: space-between; /* 항목들을 좌우로 자동 정렬 */
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 10px 20px;
+  flex-wrap: wrap;         /* 작은 화면일 때 줄바꿈 허용 */
+}
+
+/* 각 메뉴 항목 */
+.nav-item {
+  margin: 5px 10px;
+}
+
+/* 메뉴 링크 */
+.nav-link {
+  display: flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+
+/* 아이콘과 텍스트 간격 */
+.nav-link i {
+  margin-right: 6px;
+}
+
