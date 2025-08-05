@@ -1,0 +1,183 @@
+@charset "UTF-8";
+
+/* 메인 시작 */
+main {
+  flex: 1;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 10px;
+  gap: 40px;
+}
+
+/* intro 화면 */
+.intro-screen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+  animation: fadeOut 1.5s ease-in-out 1.5s forwards;
+}
+
+.earth-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/earth.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.7);
+  z-index: -1;
+  animation: zoomIn 2s ease-out;
+}
+
+.intro-title {
+  color: white;
+  font-size: 3rem;
+  text-align: center;
+  padding: 0 20px;
+  text-shadow: 0 0 10px rgba(0,0,0,0.7);
+  animation: fadeIn 2s ease-out;
+}
+
+/* 애니메이션 */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ------------------본문 콘텐츠--------------------- */
+
+.example-section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;  /* 꽉 채우기 */
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.example-section::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/2.ボランティア活動_養護施設奉仕活動_1.jpg'); /* 이미지 경로 수정 */
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  filter: brightness(0.6); /* 어둡게 해서 텍스트 가독성 확보 */
+}
+
+.example-section .example-text {
+  position: relative;
+  z-index: 1;
+  padding: 0 20px;
+}
+
+.example-section .example-text h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.example-section .example-text p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* profile-section: 수평 정렬 및 전체 크기 확대 */
+.profile-section {
+  max-width: 3600px;
+  margin: 300px auto;      /* 위아래 100px, 좌우 자동 중앙 정렬 */
+  padding: 100px 80px;     /* 상하 100px, 좌우 80px 여백 */
+  background-color: #f9f9f9; /* 연한 배경색 */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  will-change: opacity, transform;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(100px); /* 아래 100px 위치에서 시작 */
+  transition: opacity 2s ease-out, transform 2s ease-out;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0); /* 원래 위치로 올라옴 */
+  transition: opacity 2s ease-out, transform 2s ease-out;
+}
+
+/* 프로필 내 래퍼: 수평 정렬 */
+.profile-wrapper {
+  display: flex;
+  align-items: center;    /* 세로 중앙 정렬 */
+  gap: 50px;
+  flex-wrap: wrap;
+  justify-content: center; /* 중앙 정렬 유지 */
+}
+
+/* 사진 크기 키우기 */
+.profile-wrapper img {
+  width: 800px;      /* 가로 크기 고정 */
+  height: 750px;     /* 세로 크기 고정 */
+  object-fit: cover; /* 이미지 비율 유지하며 영역 꽉 채우기 */
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* 텍스트 영역 */
+.profile-text {
+  flex: 1;
+  font-size: 1.7rem;      
+  line-height: 2.1;
+  color: #222;
+}
+
+/* 이름 제목 */
+.profile-text h1 {
+  font-family: 'Reggae One', cursive;
+  font-size: 3.5rem;      /* 기존 2.5rem에서 3.5rem으로 확대 */
+  margin-bottom: 24px;
+  color: #111;
+}
+
+/* 문단 */
+.profile-text p {
+  font-family: 'Reggae One', cursive;
+  margin-bottom: 16px;
+  color: #333;
+}

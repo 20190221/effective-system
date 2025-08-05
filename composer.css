@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+main.creators {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: calc(100vh - 120px); /* header+footer 제외 */
+  background: #eee;
+  padding: 20px;
+  gap: 10px;
+}
+
+/* 제작자 박스 */
+.creator {
+  flex: 1 1 0;
+  max-width: 400px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  font-family: 'Arial' sans-serif;
+}
+
+.creator img {
+  width: 100%;
+  height: auto;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+  border-radius: 12px;
+}
+
+.creator:hover img {
+  filter: grayscale(0%);
+}
+
+.creator p {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  font-family: 'Arial' sans-serif;
+}
+
+/* 모달(프로필 상세) 스타일 */
+.modal {
+  display: none; /* 숨김 */
+  position: fixed;
+  top: 0; left: 0; right:0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.modal-content h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.modal-content p {
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* 닫기 버튼 */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 2rem;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+}
+
+.close:hover {
+  color: #000;
+}
+
