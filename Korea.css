@@ -1,60 +1,40 @@
 @charset "UTF-8";
 
 body {
-  font-family: sans-serif;
-  padding: 20px;
-  background-color: #f5f5f5;
+  margin: 0;
+  font-family: 'Noto Sans JP', sans-serif;
+  background: url(images/sakura_bg.jpg) no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
 }
 
-/* Flexbox 컨테이너 */
-.qa-container {
-  display: flex;
-  flex-direction: column;   /* 세로로 나열 */
-  gap: 20px;                /* Q&A 사이 간격 */
-  padding: 20px 40px;       /* 위아래 20px, 좌우 40px 여백 */
+.page-header {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(0,0,0,0.4);
+  font-size: 2rem;
+  letter-spacing: 2px;
 }
 
-.container {
-  max-width: 800px;    /* 최대 너비 고정 */
-  width: 100%;         /* 화면이 작을 경우 100%까지 줄어듦 */
-  margin: 0 auto;      /* 좌우 중앙 정렬 */
-  padding: 60px 40px;  /* 위아래 60px, 좌우 40px 여백 */
-  background-color: #c7c7c7;
+.content-card {
+  background: rgba(0, 0, 0, 0.55);
+  margin: 2rem auto;
+  padding: 2rem;
+  width: 80%;
+  max-width: 800px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
-/* 각 Q&A 박스 */
-.qa-item {
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  overflow: hidden;
+.content-card h2 {
+  border-bottom: 2px solid #f8b500;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-
-.question {
-  padding: 15px;
-  cursor: pointer;
-  font-weight: bold;
-  position: relative;
-}
-
-.question::after {
-  content: "▼";
-  position: absolute;
-  right: 15px;
-  transition: transform 0.3s;
-}
-
-.qa-item.active .question::after {
-  transform: rotate(180deg); /* ▼ to ▲ */
-}
-
-.answer {
-  display: none;
-  padding: 15px;
-  border-top: 1px solid #ddd;
-  background-color: #fafafa;
-}
 
 .qa-item.active .answer {
   display: block;
