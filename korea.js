@@ -1,8 +1,14 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.content-card');
 
-// 모든 질문에 클릭 이벤트 추가
-document.querySelectorAll('.question').forEach(function(question) {
-  question.addEventListener('click', function() {
-    const qaItem = this.parentElement;
-    qaItem.classList.toggle('active');
-  });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  cards.forEach(card => observer.observe(card));
 });
