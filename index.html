@@ -4,20 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Reggae+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
   <title>interview-title</title>
 </head>
 <body>
   <div class="intro-screen">
     <div class="earth-bg"></div>
-    <h1 class="intro-title">Global Interview Site</h1>
-    <button id="enter-btn">Enter</button>
+    <h1 class="intro-title">浅野様の朝から夜まで。</h1>
   </div>
 <header class="navbar">
   <div class="logo">
-     <a href="index.html">Website-title</a></div>
+     <a href="index.html"></a></div>
   <div class="menu-toggle" id="menu-toggle">
   <span class="bar"></span>
   <span class="bar"></span>
@@ -25,14 +26,18 @@
 </div>
 </header>
 <nav class="side-menu">
-  <ul>
-    <li><a href="index.html">HOME</a></li>
-    <li><a href="Japan.html">Japan</a></li>
-    <li><a href="China.html">China</a></li>
-    <li><a href="Korea.html">Korea</a></li>
-    <li><a href="end.html">ADVICE</a></li>
-    <li><a href="composer.html">COMPOSER</a></li>
-  </ul>
+  <div class="backgroundimg"></div>
+  <div class="menu-images">
+    <a href="Japan.html" class="menu-item">
+      <img src="images/일본.jpg" alt="Japan">
+    </a>
+    <a href="China.html" class="menu-item">
+      <img src="images/중국.jpg" alt="China">
+    </a>
+    <a href="Korea.html" class="menu-item">
+      <img src="images/한국.jpg" alt="Korea">
+    </a>
+  </div>
 </nav>
 <main>
   <!-- 속표지: 한 화면 전체 차지 -->
@@ -44,14 +49,17 @@
       <p>『人財育成とともに、社会課題を解決する「ものづくり」で、<br>
           地域に貢献する地域密着型企業であり続ける』</p>
     </div>
-
     <button class="slide-btn prev">&#10094;</button>
     <button class="slide-btn next">&#10095;</button>
-
     <div class="slide-indicators"></div>
   </div>
 </section>
-
+<section class="team-section">
+  <div class="team-text">
+    <h2 class="team-name">チーム紹介</h2>
+  </div>
+  <div class="team-image"></div>
+</section>
   <!-- 프로필 섹션: 수평 정렬 -->
   <section class="profile-section hidden">
     <div class="profile-wrapper">
@@ -88,11 +96,6 @@
          興味を持つことで、困難を乗り越えることができる。</p>
     </div> 
   </section>
-  <section class="team-introduce">
-    <div class="introduce-text">
-      <h1></h1>
-    </div>
-  </section>
 </main>
 <footer class="site-footer">
   <div class="footer-content">
@@ -104,7 +107,6 @@
     <li><a href="Japan.html">Japan</a></li>
     <li><a href="China.html">China</a></li>
     <li><a href="Korea.html">Korea</a></li>
-    <li><a href="end.html">ADVICE</a></li>
     <li><a href="composer.html">COMPOSER</a></li>
     </ul>
   </div>
@@ -116,4 +118,3 @@
     <script src="index.js"></script>
 </body>
 </html>
-
