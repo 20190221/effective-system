@@ -2,37 +2,114 @@
 
 body {
   margin: 0;
-  font-family: 'Noto Sans JP', sans-serif;
-  background: url(images/sakura_bg.jpg) no-repeat center center fixed;
-  background-size: cover;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  background-color: #f5e2c2;
+  color: #333;
+}
+
+/* 헤더 */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(245, 226, 194, 0.9);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(5px);
+}
+
+.navbar .logo a {
+  font-weight: bold;
+  color: #516160;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+/* 사이드 메뉴 */
+.side-menu {
+  position: fixed;
+  left: 0;
+  top: 60px;
+  width: 200px;
+  background: rgba(176, 181, 126, 0.9);
+  height: 100%;
+  padding-top: 2rem;
+}
+
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-menu li {
+  margin: 1rem 0;
+}
+
+.side-menu a {
+  text-decoration: none;
   color: #fff;
+  font-weight: bold;
 }
 
-.page-header {
+.side-menu a.active {
+  color: #f9a8a0;
+}
+
+/* 필름 스타일 */
+main {
+  margin-left: 220px;
+  padding-top: 80px;
+}
+
+.film-section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.film-section.reverse {
+  flex-direction: row-reverse;
+}
+
+.film-photo {
+  position: relative;
+  background: #000;
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.film-photo img {
+  display: block;
+  width: 350px;
+  height: auto;
+}
+
+.film-date {
+  position: absolute;
+  bottom: 5px;
+  right: 15px;
+  color: #fff;
+  font-size: 0.8rem;
+  font-family: 'Nanum Pen Script', cursive;
+}
+
+.film-note {
+  background: rgba(255,255,255,0.9);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  max-width: 500px;
+}
+
+/* 푸터 */
+.site-footer {
+  background: rgba(245, 226, 194, 0.9);
+  padding: 1rem;
   text-align: center;
-  padding: 2rem;
-  background: rgba(0,0,0,0.4);
-  font-size: 2rem;
-  letter-spacing: 2px;
+  backdrop-filter: blur(5px);
 }
-
-.content-card {
-  background: rgba(0, 0, 0, 0.55);
-  margin: 2rem auto;
-  padding: 2rem;
-  width: 80%;
-  max-width: 800px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease, transform 1s ease;
-}
-
-.content-card h2 {
-  border-bottom: 2px solid #f8b500;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-
