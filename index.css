@@ -11,7 +11,12 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Kosugi Maru', cursive;
+}
+
+body.intro-active {
+  overflow: hidden;
+  height: 100vh;
 }
 
 header, footer {
@@ -23,20 +28,20 @@ header, footer {
 
 .navbar {
   position: fixed;
-  top: 0; 
+  top: 0;
   left: 0;
   width: 100%;
   height: 80px;
-  background-color: transparent; /* ✅ 투명 배경 */
-  font-family: 'Noto Sans KR', sans-serif;
+  background-color: transparent;
   color: black;
   transition: background-color 0.3s ease, color 0.3s ease;
-  z-index: 9000;
+  z-index: 10000;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* ✅ 좌우 정렬 */
+  justify-content: space-between;
   padding: 0 40px;
 }
+
 
 .navbar-left {
   width: 2rem; /* 유지 */
@@ -57,28 +62,45 @@ header, footer {
 .logo a {
   color: inherit;
   text-decoration: none;
+  font-size: 1.8rem;
 }
 
 .menu-toggle {
+  position: fixed;
+  top: 20px;
+  right: 40px;
   width: 32px;
   height: 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  top: 20px;  
-  right: 40px;;
-  position: fixed;
-  z-index: 10001;
+  z-index: 11000; /* 항상 메뉴 위 */
 }
 
-.menu-toggle span {
+.menu-toggle span.bar {
   display: block;
   height: 4px;
   width: 100%;
-  background-color: currentColor;
+  background-color: black;
   border-radius: 10px;
   transition: all 0.4s ease-in-out;
+}
+
+.menu-toggle.open span.bar:nth-child(1) {
+  transform: translateY(12px) rotate(45deg);
+}
+
+.menu-toggle.open span.bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open span.bar:nth-child(3) {
+  transform: translateY(-12px) rotate(-45deg);
+}
+
+.navbar.menu-open .menu-toggle span {
+  background-color: white; /* 흰 배경에서도 보이게 */
 }
 
 /* 애니메이션: 열렸을 때 X 모양으로 */
@@ -118,49 +140,73 @@ header, footer {
   color: white;
 }
 
+/* 사이드 메뉴 */
 .side-menu {
   position: fixed;
   top: 0;
   right: -100%;
   height: 100vh;
   width: 100%;
-  background: url(images/menu.jpg) no-repeat center center / cover;
-  color: white;
+  opacity: 0.8;
+  background-color: #111;
   transition: right 0.3s ease;
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 9999;
-}
-
-.side-menu ul {
-  list-style: none;
-  text-align: center;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-
-.side-menu li {
-  margin: 2rem 0;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-
-.side-menu a {
-  color: white;
-  text-decoration: none;
-  font-family: 'Noto Sans KR', sans-serif;
-  font-size: 2rem;
-  transition: color 0.3s ease;
-}
-
-.side-menu a:hover {
-  color: #00ffff;
+  justify-content: center;
+  z-index: 1000;
+  overflow: hidden;
 }
 
 .side-menu.open {
   right: 0;
-  z-index: 9000;
 }
 
+
+.menu-images {
+  display: flex;
+  width: 90%;
+  height: 60vh;
+  gap: 1rem;
+}
+
+.menu-item {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  display: block;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+
+.menu-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.menu-item span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+  font-family: 'Kosugi Maru', cursive;
+  z-index: 2;
+}
+
+.menu-item:hover img {
+  transform: scale(1.05);
+}
+
+.menu-item:hover span {
+  background: rgba(0, 255, 255, 0.6);
+}
 
 /*---------------푸터 시작---------------*/
 
@@ -168,7 +214,7 @@ header, footer {
   background-color: #111;
   color: #fff;
   padding: 10px 10px 10px 10px;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Kosugi Maru', cursive;
 }
 
 .footer-content {
@@ -236,7 +282,7 @@ main {
   padding-right: 0;
   padding-bottom: 10px;
   gap: 40px;
-  background-color: white;
+  background-color: ivory;
 }
 
 /* intro 화면 */
@@ -250,6 +296,9 @@ main {
   align-items: center;
   z-index: 9999;
   overflow: hidden;
+  background: black; /* 배경 깜빡임 방지 */
+  opacity: 1;
+  transition: opacity 1s ease; /* 부드러운 페이드 효과 */
 }
 
 .earth-bg {
@@ -257,7 +306,7 @@ main {
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('images/earth.jpg');
+  background-image: url('images/KakaoTalk_20250814_161620608.png');
   background-size: cover;
   background-position: center;
   filter: brightness(0.7);
@@ -267,64 +316,31 @@ main {
 
 .intro-title {
   color: white;
-  font-size: 3rem;
+  font-size: 72px;
   text-align: center;
   padding: 0 20px;
   text-shadow: 0 0 10px rgba(0,0,0,0.7);
   animation: fadeIn 2s ease-out;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Kosugi Maru', cursive;
 }
 
-.enter-btn {
-  margin-top: 30px;
-  padding: 12px 24px;
-  font-size: 1.2rem;
-  background-color: white;
-  color: black;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  z-index: 10;
+/* 슬라이드 애니메이션 */
+.slide-anim {
+  opacity: 0;
+  transform: translateX(0);
+  transition: transform 1.2s ease-out, opacity 1.2s ease-out;
 }
 
-.enter-btn:hover {
-  background-color: #ddd;
+.slide-anim.show {
+  opacity: 1;
 }
 
-#enter-btn {
-  margin-top: 30px;
-  padding: 14px 36px;
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #fff;
-  background: linear-gradient(135deg, #f78ca0 0%, #f9748f 50%, #fd868c 100%);
-  border: none;
-  border-radius: 30px;
-  box-shadow: 0 8px 15px rgba(247,140,160,0.4);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  user-select: none;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+.from-left {
+  transform: translateX(-50px);
 }
 
-#enter-btn:hover {
-  background: linear-gradient(135deg, #fd868c 0%, #f9748f 50%, #f78ca0 100%);
-  box-shadow: 0 12px 20px rgba(253,134,140,0.6);
-  transform: translateY(-3px);
-}
-
-#enter-btn:active {
-  box-shadow: 0 4px 8px rgba(247,140,160,0.2);
-  transform: translateY(1px);
-}
-
-/* 애니메이션 */
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
+.from-right {
+  transform: translateX(50px);
 }
 
 @keyframes zoomIn {
@@ -344,20 +360,26 @@ main {
   }
 }
 
+/* 인트로 페이드아웃 */
+.intro-fade-out {
+  opacity: 0;
+}
+
 /* ------------------본문 콘텐츠--------------------- */
+
 .example-section {
   position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Kosugi Maru', cursive;
 }
 
 .background-layer {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   transition: background-image 1s ease-in-out;
   z-index: 0;
@@ -376,15 +398,17 @@ main {
 }
 
 .example-text h1 {
-  font-size: 64px;
+  font-size: 84px;
   margin-bottom: 40px;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Kosugi Maru', cursive;
+  font-weight: bold;
 }
 
 .example-text p {
-  font-size: 36px;
+  font-size: 48px;
   line-height: 1.6;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Kosugi Maru', cursive;
+  font-weight: bold;
 }
 
 .slide-btn {
@@ -430,6 +454,57 @@ main {
 .dot.active {
   background-color: white;
 }
+
+/* 애니메이션 */
+.slide-anim {
+  opacity: 0;
+  transform: translateX(0);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.slide-anim.show {
+  opacity: 1;
+}
+
+/* 왼쪽에서 들어오기 */
+.from-left {
+  transform: translateX(-50px);
+}
+
+/* 오른쪽에서 들어오기 */
+.from-right {
+  transform: translateX(50px);
+}
+
+/* -------------팀 소개 섹션--------------- */
+
+.team-text {
+  font-size: 2.8rem; /* 약 45px */
+  font-weight: 700;
+  text-align: center;
+  padding: 40px;
+  margin-bottom: 40px;
+  color: black;
+  letter-spacing: 0.1em;
+}
+
+.team-image {
+  position: relative;
+  padding: 0; /* 패딩으로 높이 조절하는 대신 고정 높이 사용 */
+  margin-top: 80px;
+  margin-bottom: 80px;
+  height: 80vh; /* 화면 높이의 80% */
+  font-family: 'Kosugi Maru', cursive;
+  background-image: url(images/teamintroduce.jpg);
+  background-size: contain; /* 잘림 없이 비율 유지 */
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  max-width: none; /* 최대 크기 제한 해제 */
+  margin: 0 auto; 
+  border-radius: 36px;
+}
+
 
 /* profile-section: 수평 정렬 및 전체 크기 확대 */
 .profile-section {
@@ -482,7 +557,7 @@ main {
 
 /* 이름 제목 */
 .profile-text h1 {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Kosugi Maru', cursive;
   font-size: 3.5rem;      /* 기존 2.5rem에서 3.5rem으로 확대 */
   margin-bottom: 24px;
   color: #111;
@@ -490,7 +565,7 @@ main {
 
 /* 문단 */
 .profile-text p {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Kosugi Maru', cursive;
   margin-bottom: 16px;
   color: #333;
 }
@@ -502,7 +577,7 @@ main {
   margin-top: 100px;
   margin-bottom: 40px;
   color: #333;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Kosugi Maru', cursive;
 }
 
 /* 박스 섹션 */
@@ -550,18 +625,18 @@ main {
 
 /* 제목/본문 텍스트 스타일 */
 section.motto {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Kosugi Maru', cursive;
 }
 
 .motto h1 {
   font-size: 2rem;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Kosugi Maru', cursive;
   margin-bottom: 10px;
   color: #2D4E66;
 }
 .motto p {
   font-size: 1.1rem;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Kosugi Maru', cursive;
   line-height: 1.6;
   color: #2D4E66;
 }
