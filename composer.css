@@ -1,89 +1,268 @@
 @charset "UTF-8";
 
-main.creators {
+/* ---------------- 전체 섹션 공통 상하 여백 ---------------- */
+.team-setumei,
+.team-photo-wrapper,
+.creators {
+  margin-top: 500px;
+  margin-bottom: 500px;
+  font-family: 'Noto sans', sans-serif;
+}
+
+/* ---------------- 팀 설명 ---------------- */
+.team-setumei {
+  width: 95%;
+  max-width: 1400px;
+  margin: 120px auto;
+  padding: 50px;
+  font-family: 'Noto Sans JP', 'Kosugi Maru', sans-serif;
+  color: #0A3D91;
+  line-height: 2;
+  background: #e6f0ff;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 61, 145, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.team-setumei:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0, 61, 145, 0.15);
+}
+
+/* H1 & H2 동일 스타일 */
+.team-setumei h1,
+.team-setumei h2 {
+  font-weight: 800;
+  color: #0A3D91;
+  border-left: 6px solid #007BFF;
+  padding-left: 25px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.team-setumei h1 { font-size: 4rem; }
+.team-setumei h2 { font-size: 3.2rem; margin-top: 5rem; }
+
+/* 밑줄 애니메이션 */
+.team-setumei h1::after,
+.team-setumei h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 5px;
+  background: #007BFF;
+  animation: slideLine 1s ease forwards;
+}
+@keyframes slideLine {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* 본문 P */
+.team-setumei p {
+  font-size: 1.6rem;
+  color: #004080;
+  margin-bottom: 3rem;
+  text-align: justify;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.3s;
+}
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 강조 텍스트 */
+.team-setumei .highlight {
+  color: #007BFF;
+  font-weight: 700;
+  background: rgba(0, 123, 255, 0.15);
+  padding: 4px 12px;
+  border-radius: 5px;
+}
+
+/* ---------------- 팀 사진 ---------------- */
+.team-photo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-top: 500px;
+  margin-bottom: 500px;
+
+  /* 스크롤 애니메이션 초기 상태 */
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.team-photo-wrapper.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.team-photo {
+  position: relative;
+  display: inline-block;
+}
+
+.team-photo img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 3px solid #007BFF;
+  display: block;
+}
+
+/* 사진 위 텍스트 */
+.photo-text {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #007BFF;
+  font-size: 2.8rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 25px 16px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 0 0 12px 12px;
+  box-sizing: border-box;
+  max-width: 90%;
+}
+
+/* ---------------- 크리에이터 섹션 ---------------- */
+.creators {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100vh - 120px);
+  padding: 20px;
+  gap: 20px;
+  margin-top: 500px;
+  margin-bottom: 500px;
+
+  /* 스크롤 애니메이션 초기 상태 */
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.creators.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.creators h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin: 80px;
+  color: #0A3D91;
+}
+
+.creator-list {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: calc(100vh - 120px); /* header+footer 제외 */
-  background: #eee;
-  padding: 20px;
+  width: 100%;
   gap: 10px;
 }
 
-/* 제작자 박스 */
 .creator {
   flex: 1 1 0;
   max-width: 400px;
   text-align: center;
   cursor: pointer;
   user-select: none;
-  font-family: 'Arial' sans-serif;
+  font-family: 'Noto sans', sans-serif;
 }
 
 .creator img {
   width: 100%;
-  height: auto;
-  filter: grayscale(100%);
-  transition: filter 0.3s ease;
+  height: 600px;
+  object-fit: cover;
   border-radius: 12px;
-}
-
-.creator:hover img {
-  filter: grayscale(0%);
+  border: 2px solid #007BFF;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform: scale(1);
+  box-shadow: 0 5px 15px rgba(0,123,255,0.2);
 }
 
 .creator p {
   margin-top: 10px;
   font-weight: bold;
   font-size: 1.2rem;
-  font-family: 'Arial' sans-serif;
+  font-family: 'Arial', sans-serif;
+  color: #004080;
 }
 
-/* 모달(프로필 상세) 스타일 */
+/* ---------------- 모달 ---------------- */
 .modal {
-  display: none; /* 숨김 */
-  position: fixed;
-  top: 0; left: 0; right:0; bottom: 0;
-  background: rgba(0,0,0,0.7);
-  justify-content: center;
-  align-items: center;
+  display: none;
+  position: fixed; top:0; left:0; right:0; bottom:0;
+  justify-content: center; align-items: center;
   z-index: 9999;
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(3px);
 }
 
 .modal-content {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 400px;
-  width: 90%;
+  background: #fff9d9;
+  padding: 2.5rem 2rem;
+  border-radius: 15px;
+  max-width: 800px; width: 90%;
   text-align: center;
   position: relative;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  border-top: 5px solid #ffda6c;
+
+  transform: translateY(50px) scale(0.85);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.25, 1.25, 0.5, 1), opacity 0.5s ease;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.modal.show .modal-content {
+  transform: translateY(0) scale(1);
+  opacity: 1;
 }
 
 .modal-content h2 {
   margin-bottom: 1rem;
-  text-align: center;
+  text-align: left;
+  color: #4a3b00;
+  font-size: 2.2rem;
+  font-weight: 700;
 }
 
 .modal-content p {
-  font-size: 1rem;
-  line-height: 1.5;
-  text-align: center;
+  text-align: left;
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: #3e2f00;
 }
 
-/* 닫기 버튼 */
+.modal-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
 .close {
   position: absolute;
-  top: 15px;
-  right: 20px;
+  top: 15px; right: 20px;
   font-size: 2rem;
-  color: #333;
+  color: #4a3b00;
   cursor: pointer;
   user-select: none;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .close:hover {
-  color: #000;
+  color: #ffb700;
+  transform: scale(1.2);
 }
-
