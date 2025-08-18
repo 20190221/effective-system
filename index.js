@@ -23,27 +23,21 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
   const backgroundLayer = document.querySelector(".background-layer");
   const textContainer = document.querySelector(".example-text");
-  const titleEl = document.querySelector(".example-text h1");
-  const textEl = document.querySelector(".example-text p");
   const indicatorsContainer = document.querySelector(".slide-indicators");
   const introScreen = document.querySelector(".intro-screen"); 
   const body = document.body;
   let slideInterval;
 
-  // 스크롤 막기
+  const prevBtn = document.querySelector(".slide-btn.prev");
+  const nextBtn = document.querySelector(".slide-btn.next");
+
   body.classList.add("intro-active");
 
-  // 이미지 사전 로딩
-  slides.forEach(slide => {
-    const img = new Image();
-    img.src = slide.image;
-  });
+  slides.forEach(slide => { new Image().src = slide.image; });
 
-  // 초기 상태
   backgroundLayer.classList.add("slide-anim", "show");
   textContainer.classList.add("slide-anim", "show");
 
-  // 배경 및 텍스트 업데이트
   function updateBackground(direction = "right") {
     backgroundLayer.classList.remove("show", "from-left", "from-right");
     textContainer.classList.remove("show", "from-left", "from-right");
@@ -58,14 +52,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
       const currentSlide = slides[currentIndex];
-      // ✅ 백틱으로 수정: url 적용
       backgroundLayer.style.backgroundImage = `url('${currentSlide.image}')`;
-      titleEl.textContent = currentSlide.title;
-      textEl.innerHTML = currentSlide.text;
 
-      // ✅ 글자색 적용
-      titleEl.style.color = currentSlide.color;
-      textEl.style.color = currentSlide.color;
+      textContainer.innerHTML = `
+        <h1 style="color:${currentSlide.color}">${currentSlide.title}</h1>
+        <p style="color:${currentSlide.color}">${currentSlide.text}</p>
+      `;
 
       requestAnimationFrame(() => {
         backgroundLayer.classList.add("show");
@@ -76,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 100);
   }
 
-  // 점(dot) UI 업데이트
   function updateDots() {
     const dots = indicatorsContainer.querySelectorAll(".dot");
     dots.forEach((dot, index) => {
@@ -84,18 +75,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 다음 슬라이드
   function nextSlide() {
     currentIndex = (currentIndex + 1) % slides.length;
     updateBackground("right");
   }
 
-  // 자동 슬라이드 시작
   function startAutoSlide() {
     slideInterval = setInterval(nextSlide, 5000);
   }
 
-  // 점(dot) 생성
   function createDots() {
     indicatorsContainer.innerHTML = ''; 
     slides.forEach((_, index) => {
@@ -113,7 +101,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ✅ 인트로 자동 종료 (3초 후 부드러운 페이드아웃)
+  prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateBackground("left");
+    clearInterval(slideInterval);
+    startAutoSlide();
+  });
+
+  nextBtn.addEventListener("click", () => {
+    nextSlide();
+    clearInterval(slideInterval);
+    startAutoSlide();
+  });
+
+  createDots();
+  updateBackground();
+
   setTimeout(() => {
     introScreen.classList.add("intro-fade-out");
     body.classList.remove("intro-active");
@@ -121,11 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
     introScreen.addEventListener("transitionend", () => {
       introScreen.style.display = "none";
       backgroundLayer.classList.add("visible");
-      createDots();
-      updateBackground();
       startAutoSlide();
 
-      // IntersectionObserver
       const hiddenObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -149,5 +149,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
       boxes.forEach(box => mottoObserver.observe(box));
     }, { once: true });
-  }, 3000);
+  }, 1500);
+
+  // ------------------------------
+  // 여기서부터 introduce-text 스크롤 등장 애니메이션 추가
+  const introduceText = document.querySelector(".introduce-text");
+
+  const introduceObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show"); // CSS show 클래스 활성화
+        obs.unobserve(entry.target); // 한 번만 실행
+      }
+    });
+  }, { threshold: 0.5 });
+
+  introduceObserver.observe(introduceText);
 });
