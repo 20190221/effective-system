@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => { 
   const slides = [
     {
-      image: "images/KakaoTalk_20250814_162219822.jpg",
+      image: "images/retsya1.jpg",
       title: "日本",
       text: "始まった淺野さんのキャリア、その原点とは？",
-      color: "black"
+      color: "#18149bff",  
     },
     {
       image: "images/retsya2.jpg",
       title: "中国",
       text: "中国で直面した。。。",
-      color: "#ffcc00"
+      color: "#ffae00ff"
     },
     {
       image: "images/retsya3.jpg",
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       boxes.forEach(box => mottoObserver.observe(box));
     }, { once: true });
-  }, 1500);
+  }, 4000);  // 4초 유지
 
   // ------------------------------
   // 여기서부터 introduce-text 스크롤 등장 애니메이션 추가
