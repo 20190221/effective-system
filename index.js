@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       image: "images/retsya1.jpg",
       title: "日本",
-      text: "始まった淺野さんのキャリア、その原点とは？",
+      text: "始まった浅野さんのキャリア、その原点とは？",
       color: "#18149bff",  
     },
     {
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       image: "images/retsya3.jpg",
       title: "韓国",
-      text: "日本、中国に続いて韓国にやってきた淺野さん。 叶えたい目標は？",
+      text: "日本、中国に続いて韓国にやってきた浅野さん。 叶えたい目標は？",
       color: "#00ffcc"
     }
   ];
@@ -166,3 +166,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   introduceObserver.observe(introduceText);
 });
+
