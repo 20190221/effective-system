@@ -11,7 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="Japan.css" />
+  <link rel="stylesheet" href="Japan.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Header -->
@@ -19,20 +20,27 @@
     <div class="logo"><a href="index.html">Website-title</a></div>
     <button class="menu-toggle" aria-label="Open menu">MENU</button>
   </header>
-
-  <!-- Side Navigation -->
-  <nav class="side-menu" aria-label="Site">
-    <ul>
-      <li><a href="index.html">HOME</a></li>
-      <li><a class="active" href="Japan.html">Japan</a></li>
-      <li><a href="China.html">China</a></li>
-      <li><a href="Korea.html">Korea</a></li>
-      <li><a href="end.html">ADVICE</a></li>
-      <li><a href="composer.html">COMPOSER</a></li>
-    </ul>
-  </nav>
-
   <!-- Main -->
+   <header class="navbar">
+  <div class="menu-toggle" id="menu-toggle">
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+</div>
+<nav class="side-menu">
+  <div class="backgroundimg"></div>
+  <div class="menu-images">
+    <a href="Japan.html" class="menu-item">
+      <img src="images/일본.jpg" alt="Japan">
+    </a>
+    <a href="China.html" class="menu-item">
+      <img src="images/중국.jpg" alt="China">
+    </a>
+    <a href="Korea.html" class="menu-item">
+      <img src="images/한국.jpg" alt="Korea">
+    </a>
+  </div>
+</nav>
   <main class="container">
     <!-- Section 1 -->
     <section class="film-section reveal">
@@ -99,5 +107,6 @@
 
   <!-- Scripts -->
   <script src="Japan.js"></script>
+  <script src="style.js"></script>
 </body>
 </html>
