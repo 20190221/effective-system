@@ -1,98 +1,78 @@
 @charset "UTF-8";
 
-/*--------------해더 스타일------------------*/
+/*============== Design Tokens ==============*/
+:root{
+  --bg: #ffffff;
+  --text: #0f172a;          /* 기본 글자색 */
+  --muted: #475569;         /* 부드러운 글자색 */
+  --line: #e5e7eb;          /* 구분선 */
+  --blue-50: #eef6ff;
+  --blue-100:#eaf2ff;
+  --blue-200:#cfe3ff;
+  --blue-500:#3b82f6;
+  --blue-600:#2563eb;
+  --blue-700:#1d4ed8;      /* 포인트 블루 */
+  --header-footer-color: #1d4ed8; /* 헤더/푸터 글자색 */
+  --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --radius: 14px;
+}
 
 * {
   box-sizing: border-box;
 }
 
-body, html {
-  margin: 0; padding: 0;
-  height: 100%;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
-header, footer {
-  text-align: center;
-  padding: 1rem;
-  background: #222;
-  color: white;
-}
-
-.navbar {
-  position: fixed;
-  top: 0; 
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background-color: white;
-  color: black;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  z-index: 9000;
-  /* flex 설정 */
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* 메뉴 버튼 우측 정렬 */
-  padding: 0 40px;
-  border-bottom: 2px solid #ccc;
-}
-
-.navbar-left {
-  width: 2rem; /* 메뉴 버튼과 같은 너비만큼 빈 공간 */
-}
-
-.navbar.hidden {
-  top: -100px; /* 헤더 숨김 위치 */
-  transition: top 0.3s ease; /* 이거 중요 */
-}
-
-.logo {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2rem;
+html, body {
   margin: 0;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  background-color: #eef6ff; /* 기본 배경 */
+  color: var(--text);
 }
 
-.logo a {
-  color: inherit;
+/*============== Header ==============*/
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,0.86);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  color: var(--header-footer-color);
+}
+
+.logo a{
   text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+  letter-spacing: .2px;
 }
 
-.menu-toggle {
-  font-size: 2rem;
+.menu-toggle{
+  appearance: none;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--muted);
+  padding: 8px 14px;
+  border-radius: 10px;
   cursor: pointer;
-  background: transparent;
-  border: none;
-  position: static; /* flex 아이템으로 정상 배치 */
-  z-index: 10;
+  transition: border-color .2s, color .2s, transform .06s;
 }
-
-.menu-toggle:hover {
-  color: #39f;
-  transition: color 0.2s ease;
-}
-
-.navbar.menu-open .menu-toggle:hover {
-  color: #00ffff;
-  transition: color 0.2s ease;
-}
-
-/* 메뉴가 열렸을 때 색상 변경 */
-.menu-toggle.open {
-  color: white;
-}
+.menu-toggle:active{ transform: scale(0.98); }
+.menu-toggle:hover{ border-color: var(--blue-200); color: var(--blue-700); }
 
 .navbar.menu-open {
-  background-color: #111;  /* 어두운 배경 */
-  color: white;            /* 흰 글씨 */
+  background-color: #111;
+  color: white;
 }
 
-/* 메뉴 열렸을 때 메뉴 토글 버튼 글자 색상도 변경 */
 .navbar.menu-open .menu-toggle {
   color: white;
 }
 
+/*============== Side Menu ==============*/
 .side-menu {
   position: fixed;
   top: 0;
@@ -112,17 +92,17 @@ header, footer {
   list-style: none;
   text-align: center;
   font-family: 'Noto Sans KR', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .side-menu li {
   margin: 2rem 0;
-  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .side-menu a {
   color: white;
   text-decoration: none;
-  font-family: 'Noto Sans KR', sans-serif;
   font-size: 2rem;
   transition: color 0.3s ease;
 }
@@ -131,18 +111,16 @@ header, footer {
   color: #00ffff;
 }
 
-.side-menu.open {
-  right: 0;
-  z-index: 9000;
-}
+.side-menu.open { right: 0; }
 
-
-/*---------------푸터 시작---------------*/
+/*============== Footer ==============*/
 
 .site-footer {
-  background-color: #111;
-  color: #fff;
-  padding: 10px 10px 10px 10px;
+  margin-left: 0;          
+  width: 100%;             
+  border-top: 1px solid var(--line);
+  background: #fff;
+  color: var(--header-footer-color);
 }
 
 .footer-content {
@@ -152,52 +130,54 @@ header, footer {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #444;
   padding-top: 10px;
   padding-bottom: 20px;
 }
 
-.footer-logo {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-
-.footer-logo a {
-  color: inherit;          /* 부모 색상 상속 */
-  text-decoration: none;   /* 밑줄 제거 */
-  transition: color 0.3s;
-  cursor: pointer;
-}
-
-.footer-logo a:hover {
-  color: #00ffff; /* 푸터 네비게이션 링크와 같은 호버 색상 */
+.footer-logo a{
+  text-decoration: none;
+  color: var(--header-footer-color);
+  font-weight: 700;
 }
 
 .footer-nav {
-  list-style: none;
   display: flex;
-  gap: 20px;
-  padding: 0;
-  margin: 0;
   flex-wrap: wrap;
+  gap: 8px;                     /* 링크 간격 줄임 */
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.footer-nav li a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: color 0.3s;
+.footer-nav a{
+  text-decoration:none; 
+  color: var(--header-footer-color);
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background .2s, color .2s;
 }
 
-.footer-nav li a:hover {
-  color: #00ffff; /* hover 효과 - 시안색 추천 */
+.footer-nav a:hover{
+  background: var(--blue-50);
+  color: var(--blue-700);
 }
 
 .footer-bottom {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 0.9rem;
-  color: #aaa;
+  border-top: 1px solid var(--line);
+  padding: 12px 24px;
+  color: var(--header-footer-color);
+  font-size: .9rem;
+  text-align: center;           /* 하단 텍스트 중앙 정렬 */
 }
 
 
+/*============== Responsive ==============*/
+@media (max-width: 860px){
+  .side-menu{
+    transform: translateX(-100%);
+    transition: transform .25s ease;
+    box-shadow: var(--shadow);
+  }
+  .side-menu.open{ transform: translateX(0); }
+  .site-footer{ margin-left: 0; }
+}
