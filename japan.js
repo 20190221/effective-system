@@ -1,17 +1,19 @@
-// Intersection reveal
-document.addEventListener('DOMContentLoaded', () => {
-  const sections = document.querySelectorAll('.film-section');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('show');
-    });
-  }, { threshold: 0.2 });
-  sections.forEach(s => io.observe(s));
-});
+// 스크롤 애니메이션
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
 
-// Side menu toggle on mobile
-const toggle = document.querySelector('.menu-toggle');
-const side = document.querySelector('.side-menu');
-toggle?.addEventListener('click', () => {
-  side.classList.toggle('open');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, observerOptions);
+
+// 모든 타임라인 아이템에 옵저버 적용
+document.querySelectorAll('.timeline-item').forEach(item => {
+  observer.observe(item);
 });
