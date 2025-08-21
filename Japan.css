@@ -1,67 +1,192 @@
 @charset "UTF-8";
 
-/* ===== Main Container ===== */
-.container{
-  padding: 32px 24px 80px;
-  margin-left: 240px; /* space for side menu */
-  max-width: 1120px;
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 2rem 0;
 }
 
-/* ===== Film Sections (clean blue accent) ===== */
-.film-section{
-  display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 32px;
-  align-items: start;
-  margin: 48px 0;
+/* --- 중앙 선(철도 레일) --- */
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #001d6c,
+    #001d6c 20px,
+    #f8b500 20px,
+    #f8b500 40px
+  );
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 29, 108, 0.3);
+  animation: railGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes railGlow {
+  from { box-shadow: 0 0 20px rgba(0, 29, 108, 0.3); }
+  to { box-shadow: 0 0 30px rgba(248, 181, 0, 0.5); }
+}
+
+/* --- 각 타임라인 아이템 --- */
+.timeline-item {
+  padding: 20px 40px;
+  position: relative;
+  width: 50%;
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity .7s ease, transform .7s ease;
+  transform: translateY(50px) scale(0.9);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.film-section.reverse{ grid-template-columns: 1fr 420px; }
-.film-section.show{ opacity: 1; transform: translateY(0); }
 
-/* Photo (polaroid-ish, subtle) */
-.film-photo{
+.timeline-item.animate-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* 왼쪽 역 위치 */
+.timeline-item.left {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item.left::before {
+  right: -15px;
+}
+
+/* 오른쪽 역 위치 */
+.timeline-item.right {
+  left: 50%;
+}
+
+.timeline-item.right::before {
+  left: -15px;
+}
+
+/* --- 콘텐츠 카드 --- */
+.timeline-item .content {
   background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 10px;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 3px solid #001d6c;
+  color: #111;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* 호버 시 3D 틸트 + 확대 효과 */
+.timeline-item .content:hover {
+  transform: translateY(-15px) scale(1.05) rotateX(5deg);
+  box-shadow: 
+    0 20px 40px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(248, 181, 0, 0.5),
+    inset 0 0 0 1px rgba(248, 181, 0, 0.2);
+  border-color: #212cff;
+}
+
+/* 글로우 오버레이 효과 */
+.timeline-item .content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #32bbff60,
+    transparent
+  );
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.timeline-item .content:hover::before {
+  left: 100%;
+}
+
+/* --- 제목 스타일링 --- */
+.timeline-item h2 {
+  color: #001d6c;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-item h2::after {
+  content: '|';
+  color: #f8b500;
+  opacity: 0;
+  animation: blink 1s infinite;
+}
+
+.timeline-item.animate-in h2::after {
+  animation: blink 1s infinite, typing 0.1s steps(1) 1.5s forwards;
+}
+
+@keyframes typing {
+  to { opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* --- 텍스트 스타일링 --- */
+.timeline-item p {
+  color: #555;
+  line-height: 1.6;
   position: relative;
 }
-.film-photo img{
-  width: 100%;
-  height: auto;
-  display:block;
-  border-radius: 10px;
-}
-.film-date{
-  position: absolute;
-  right: 16px;
-  bottom: 10px;
-  background: rgba(59,130,246,0.12);
-  color: var(--blue-700);
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-size: .8rem;
-  border: 1px solid var(--blue-200);
+
+.timeline-item .content:hover p {
+  color: #333;
 }
 
-/* Note Card */
-.film-note{
+/* --- 역(Station) 원형 표시 --- */
+.timeline-item::before {
+  content: "🚉";
+  position: absolute;
+  top: 20px;
+  width: 30px;
+  height: 30px;
   background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 24px 26px;
+  border: 3px solid #001d6c;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 26px;
+  font-size: 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  animation: pulse 2s ease-in-out infinite;
 }
-.film-note h2{
-  margin: 0 0 12px;
-  font-size: 1.25rem;
-  color: var(--blue-700);
+
+@keyframes pulse {
+  0%, 100% { 
+    transform: scale(1); 
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2), 0 0 0 0 rgba(0, 29, 108, 0.7);
+  }
+  50% { 
+    transform: scale(1.1); 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 0 0 10px rgba(0, 29, 108, 0);
+  }
 }
-.film-note p{
-  margin: 0;
-  color: var(--text);
+
+.timeline-item:hover::before {
+  transform: scale(1.2) rotate(360deg);
+  background: #212cff;
+  border-color: #212cff;
+  box-shadow: 0 6px 20px rgba(248, 181, 0, 0.4);
 }
