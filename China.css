@@ -4,9 +4,11 @@ body {
   background:linear-gradient(#eef6ff 20%,#ffd50063);
 }
 
+
+/* ----------------- 타임라인 전체 ----------------- */
 .timeline {
   position: relative;
-  max-width: 900px;
+  max-width: 1300px;
   margin: 4rem auto;
   padding: 2rem 0;
 }
@@ -15,11 +17,11 @@ body {
 .timeline::after {
   content: '';
   position: absolute;
-  width: 10px;
   top: 0;
   bottom: 0;
-  left: 50%;
-  margin-left: -5px;
+  left: 50%;                  /* 타임라인 정중앙 */
+  transform: translateX(-50%);
+  width: 10px;
   background: repeating-linear-gradient(
     to bottom,
     #001d6c,
@@ -34,17 +36,20 @@ body {
 
 @keyframes railGlow {
   from { box-shadow: 0 0 20px rgba(0, 29, 108, 0.3); }
-  to { box-shadow: 0 0 30px rgba(248, 181, 0, 0.5); }
+  to   { box-shadow: 0 0 30px rgba(248, 181, 0, 0.5); }
 }
 
-/* --- 각 타임라인 아이템 --- */
+/* ----------------- 타임라인 아이템 ----------------- */
 .timeline-item {
-  padding: 20px 40px;
-  position: relative;
-  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 3rem 0;
   opacity: 0;
   transform: translateY(50px) scale(0.9);
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
 .timeline-item.animate-in {
@@ -52,50 +57,34 @@ body {
   transform: translateY(0) scale(1);
 }
 
-/* 왼쪽 역 위치 */
+/* --- 왼쪽 아이템: 텍스트 왼쪽 / 이미지 오른쪽 --- */
 .timeline-item.left {
-  left: 0;
-  width: 70%;
-  text-align: right;
-  transform: translateY(50px) scale(0.9);
-  margin-left: -20%; /* 바깥으로 확장 */
+  flex-direction: row;
 }
 
-.timeline-item.left::before {
-  right: -15px;
-}
-
-/* 오른쪽 역 위치 */
+/* --- 오른쪽 아이템: 이미지 왼쪽 / 텍스트 오른쪽 --- */
 .timeline-item.right {
-  left: 50%;            /* 중앙선 기준 */
-  width: 60%;           /* 원하는 폭 */
-  text-align: left;
-  transform: translateX(0) translateY(50px) scale(0.9);
+  flex-direction: row-reverse;
 }
 
-.timeline-item.right::before {
-  left: -15px;
-}
-
-/* --- 콘텐츠 카드 --- */
-.timeline-item .content {
+/* ----------------- 텍스트 박스 ----------------- */
+.timeline-item .text {
+  flex: 0 0 45%;
   background: #fff;
-  padding: 1.5rem;
+  padding: 2rem;
   border-radius: 12px;
   border: 3px solid #001d6c;
   color: #111;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  position: relative;
-  perspective: 1000px;
-  transform-style: preserve-3d;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
   overflow: hidden;
   text-align: left;
+  position: relative;
 }
 
 /* 호버 시 3D 틸트 + 확대 효과 */
-.timeline-item .content:hover {
+.timeline-item .text:hover {
   transform: translateY(-15px) scale(1.05) rotateX(5deg);
   box-shadow: 
     0 20px 40px rgba(0,0,0,0.3),
@@ -105,7 +94,7 @@ body {
 }
 
 /* 글로우 오버레이 효과 */
-.timeline-item .content::before {
+.timeline-item .text::before {
   content: '';
   position: absolute;
   top: 0;
@@ -121,84 +110,95 @@ body {
   transition: left 0.6s ease;
   pointer-events: none;
 }
-
-.timeline-item .content:hover::before {
+.timeline-item .text:hover::before {
   left: 100%;
 }
 
-/* --- 제목 스타일링 --- */
+/* ----------------- 이미지 박스 ----------------- */
+.timeline-item .image {
+  flex: 0 0 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.timeline-item .image img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+.timeline-item .image img:hover {
+  transform: scale(1.05);
+}
+
+/* ----------------- 텍스트 내부 ----------------- */
 .timeline-item h2 {
   color: #001d6c;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-size: 1.5rem;
   position: relative;
   overflow: hidden;
 }
-
 .timeline-item h2::after {
   content: '|';
   color: #f8b500;
   opacity: 0;
   animation: blink 1s infinite;
 }
-
 .timeline-item.animate-in h2::after {
   animation: blink 1s infinite, typing 0.1s steps(1) 1.5s forwards;
 }
-
 @keyframes typing {
   to { opacity: 1; }
 }
-
 @keyframes blink {
   0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+  51%,100%{ opacity: 0; }
 }
-
-/* --- 텍스트 스타일링 --- */
 .timeline-item p {
   color: #555;
   line-height: 1.6;
-  position: relative;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
-
-.timeline-item .content:hover p {
+.timeline-item .text:hover p {
   color: #333;
 }
 
-/* --- 역(Station) 원형 표시 --- */
+/* ----------------- 역(Station) 원형 표시 ----------------- */
 .timeline-item::before {
   content: "🚉";
   position: absolute;
-  top: 20px;
-  width: 30px;
-  height: 30px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 36px;
   background: #fff;
   border: 3px solid #001d6c;
   border-radius: 50%;
   text-align: center;
-  line-height: 26px;
+  line-height: 30px;
   font-size: 18px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   transition: all 0.3s ease;
   animation: pulse 2s ease-in-out infinite;
+  z-index: 2;
 }
-
 @keyframes pulse {
-  0%, 100% { 
-    transform: scale(1); 
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2), 0 0 0 0 rgba(0, 29, 108, 0.7);
+  0%,100% {
+    transform: translateX(-50%) scale(1);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2),
+                0 0 0 0 rgba(0, 29, 108, 0.7);
   }
-  50% { 
-    transform: scale(1.1); 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 0 0 10px rgba(0, 29, 108, 0);
+  50% {
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3),
+                0 0 0 10px rgba(0, 29, 108, 0);
   }
 }
-
 .timeline-item:hover::before {
-  transform: scale(1.2) rotate(360deg);
+  transform: translateX(-50%) scale(1.2) rotate(360deg);
   background: #212cff;
   border-color: #212cff;
-  box-shadow: 0 6px 20px rgba(248, 181, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(248,181,0,0.4);
 }
