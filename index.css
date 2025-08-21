@@ -4,14 +4,16 @@
 /*--------------헤더 스타일------------------*/
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-body, html {
-  margin: 0;
-  padding: 0;
+html, body {
+  width: 100%;
   height: 100%;
   font-family: 'Kosugi Maru', cursive;
+  overflow-x: hidden;
 }
 
 body.intro-active {
@@ -19,13 +21,14 @@ body.intro-active {
   height: 100vh;
 }
 
-header, footer {
+footer {
   text-align: center;
   padding: 1rem;
   background: #222;
   color: none;
 }
 
+/* ===== Navbar ===== */
 .navbar {
   position: fixed;
   top: 0;
@@ -35,16 +38,15 @@ header, footer {
   background-color: transparent;
   color: black;
   transition: background-color 0.3s ease, color 0.3s ease;
-  z-index: 10000;
+  z-index: 11000;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
 }
 
-
 .navbar-left {
-  width: 2rem; /* 유지 */
+  width: 2rem; /* 로고 공간 유지 */
 }
 
 .navbar.hidden {
@@ -52,169 +54,127 @@ header, footer {
   transition: top 0.3s ease;
 }
 
-.logo {
-  position: static;       /* ✅ 중앙 정렬 → 좌측으로 변경 */
-  transform: none;
-  font-size: 1.8rem;
-  margin: 0;
-}
-
-.logo a {
-  color: inherit;
-  text-decoration: none;
-  font-size: 1.8rem;
-}
-
+/* ===== Menu Toggle ===== */
 .menu-toggle {
-  position: fixed;
-  top: 20px;
-  right: 40px;
-  width: 32px;
-  height: 28px;
+  position: absolute;      /* navbar 기준 위치 */
+  top: 0;                  /* navbar 상단과 맞춤 */
+  right: 0;                /* navbar 오른쪽 끝과 맞춤 */
+  height: 100%;            /* navbar 높이와 동일 */
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  align-items: center;     /* 버튼 텍스트 세로 가운데 정렬 */
+  padding: 0 20px;         /* 오른쪽 안쪽 여백 */
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  z-index: 11000; /* 항상 메뉴 위 */
+  color: #1d4ed8;
+  transition: color 0.3s ease;
+  z-index: 12002;          /* side-menu보다 위 */
+}
+
+.menu-toggle:hover { 
+  color: var(--blue-700); 
 }
 
 .menu-toggle span.bar {
   display: block;
   height: 4px;
   width: 100%;
-  background-color: black;
+  background-color: #eef6ff;
   border-radius: 10px;
   transition: all 0.4s ease-in-out;
 }
 
-.menu-toggle.open span.bar:nth-child(1) {
-  transform: translateY(12px) rotate(45deg);
-}
-
-.menu-toggle.open span.bar:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-toggle.open span.bar:nth-child(3) {
-  transform: translateY(-12px) rotate(-45deg);
-}
-
-.navbar.menu-open .menu-toggle span {
-  background-color: white; /* 흰 배경에서도 보이게 */
-}
-
-/* 애니메이션: 열렸을 때 X 모양으로 */
-.menu-toggle.open span:nth-child(1) {
-  transform: translateY(12px) rotate(45deg);
-}
-
-.menu-toggle.open span:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-toggle.open span:nth-child(3) {
-  transform: translateY(-12px) rotate(-45deg);
-}
-
-
-.menu-toggle:hover {
-  color: #39f;
-  transition: color 0.2s ease;
-}
-
-.navbar.menu-open .menu-toggle:hover {
-  color: #00ffff;
-  transition: color 0.2s ease;
-}
-
-.menu-toggle.open {
-  color: white;
-}
-
-.navbar.menu-open {
-  background-color: rgba(0, 0, 0, 0.9); /* ✅ 어두운 반투명 배경 */
-  color: white;
-}
-
-.navbar.menu-open .menu-toggle {
-  color: white;
-}
-
-/* 사이드 메뉴 */
 .side-menu {
   position: fixed;
   top: 0;
-  right: -100%;
-  height: 100vh;
+  left: 0;
   width: 100%;
-  opacity: 0.8;
-  background-color: #111;
-  transition: right 0.3s ease;
+  height: 50vh;
+  z-index: 10000;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-100%);
+  transition: transform 0.5s ease, visibility 0.5s ease;
   display: flex;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(240,240,240,0.8));
+}
+
+/* 지하철 노선 (파란색) */
+.side-menu::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  height: 24px; 
+  background-color: #0047AB; /* 파란색 노선 */
+  z-index: 0;
+  border-radius: 10px;
 }
 
 .side-menu.open {
-  right: 0;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
-
-.menu-images {
+/* 역 버튼 */
+.side-button {
   display: flex;
-  width: 90%;
-  height: 60vh;
-  gap: 1rem;
-}
-
-.menu-item {
+  justify-content: center;
+  align-items: center;
+  width: 140px;   /* 버튼 크기 증가 */
+  height: 140px;  /* 버튼 크기 증가 */
+  margin: 0 20px; /* 버튼 간격 증가 */
+  background-color: #ffffff;
+  border: 5px solid #0047AB; /* 테두리 두껍게 */
+  color: #0047AB;
+  text-decoration: none;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 24px; /* 글자 크기 증가 */
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
   position: relative;
-  flex: 1;
-  overflow: hidden;
-  display: block;
-  border-radius: 15px;
-  cursor: pointer;
+  z-index: 1;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.side-button:nth-child(1),
+.side-button:nth-child(5) { /* 5번 버튼도 적용 */
+  width: 180px;
+  height: 180px;
+  font-size: 36px;
+  background-color: #0047AB; /* 종점 버튼 채움 */
+  color: #ffffff;            /* 글자 흰색 */
 }
 
 
-.menu-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
+.side-button:hover {
+  transform: scale(1.25); /* 확대 효과 증가 */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  background-color: #ADD8E6; /* 호버 시 연한 파랑 */
 }
 
-.menu-item span {
+.side-button.current::after {
+  content: "🚆";  
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 1rem;
-  background: rgba(0,0,0,0.5);
-  color: white;
-  text-align: center;
-  font-size: 2rem;
-  font-family: 'Kosugi Maru', cursive;
-  z-index: 2;
+  top: -30px;      /* 버튼 위로 위치 조정 */
+  font-size: 48px; /* 필요에 따라 크기 조정 */
 }
 
-.menu-item:hover img {
-  transform: scale(1.05);
-}
-
-.menu-item:hover span {
-  background: rgba(0, 255, 255, 0.6);
-}
 
 /*---------------푸터 시작---------------*/
-
 .site-footer {
-  background-color: #111;
-  color: #fff;
-  padding: 10px 10px 10px 10px;
-  font-family: 'Kosugi Maru', cursive;
+  margin-left: 0;
+  width: 100%;
+  border-top: 1px solid #e5e7eb; /* var(--line) 대신 직접값 */
+  background: #ffffff;            /* 배경색 직접 지정 */
+  color: #1d4ed8;                /* 글자색 직접 지정 */
+  font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
 .footer-content {
@@ -224,52 +184,43 @@ header, footer {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #444;
-  padding-top: 10px;
-  padding-bottom: 20px;
-}
-
-.footer-logo {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+  padding: 10px 24px 20px 24px;
 }
 
 .footer-logo a {
-  color: inherit;
   text-decoration: none;
-  transition: color 0.3s;
-  cursor: pointer;
-}
-
-.footer-logo a:hover {
-  color: #00ffff;
+  color: #1d4ed8; /* 직접 지정 */
+  font-weight: 700;
 }
 
 .footer-nav {
-  list-style: none;
   display: flex;
-  gap: 20px;
-  padding: 0;
-  margin: 0;
   flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.footer-nav li a {
-  color: #fff;
+.footer-nav a {
   text-decoration: none;
-  font-size: 1rem;
-  transition: color 0.3s;
+  color: #1d4ed8; /* 직접 지정 */
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
 }
 
-.footer-nav li a:hover {
-  color: #00ffff;
+.footer-nav a:hover {
+  background: #eef6ff;  /* var(--blue-50) 대신 직접 지정 */
+  color: #1d4ed8;       /* var(--blue-700) 대신 직접 지정 */
 }
 
 .footer-bottom {
-  text-align: center;
-  margin-top: 20px;
+  border-top: 1px solid #e5e7eb; /* 직접 지정 */
+  padding: 12px 24px;
+  color: #1d4ed8;                /* 직접 지정 */
   font-size: 0.9rem;
-  color: #aaa;
+  text-align: center;
 }
 
 /* 메인 시작 */
@@ -321,7 +272,7 @@ main {
   padding: 0 20px;
   text-shadow: 0 0 10px rgba(0,0,0,0.7);
   animation: fadeIn 2s ease-out;
-  font-family: 'Kosugi Maru', cursive;
+  font-family: 'Yuji Syuku', cursive;
 }
 
 /* 슬라이드 애니메이션 */
@@ -369,10 +320,11 @@ main {
 
 .example-section {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  font-family: 'Kosugi Maru', cursive;
+  font-family: 'Yuji Syuku', serif;
+  margin: 0;
 }
 
 .background-layer {
@@ -399,28 +351,17 @@ main {
 
 .example-text h1 {
   font-size: 84px;
+  margin-top: 0; /* 상단 여백 제거 */
   margin-bottom: 40px;
-  font-family: 'Kosugi Maru', cursive;
+  font-family: 'Yuji Syuku', serif;
   font-weight: bold;
-    /* 텍스트 테두리와 그림자 추가 */
-  -webkit-text-stroke: 2px #ffffff;
-  text-stroke: 1px #ffffff;
-  text-shadow: 
-    3px 3px 6px rgba(0, 0, 0, 0.8),
-    0 0 10px rgba(0, 0, 0, 0.6);
 }
 
 .example-text p {
   font-size: 48px;
   line-height: 1.6;
-  font-family: 'Kosugi Maru', cursive;
+  font-family: 'Yuji Syuku', serif;
   font-weight: bold;
-    /* 텍스트 테두리와 그림자 추가 */
-  -webkit-text-stroke: 0.8px #ffffff;
-  text-stroke: 0.8px #ffffff;
-  text-shadow: 
-    2px 2px 4px rgba(0, 0, 0, 0.8),
-    0 0 8px rgba(0, 0, 0, 0.6);
 }
 
 .slide-btn {
