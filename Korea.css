@@ -1,5 +1,16 @@
 @charset "UTF-8";
 
+body {
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    #FFF9CC 0%,
+    #C3DFFF 50%,
+    #8AA0D0 75%,
+    #1B2EA7 100%
+  );
+}
+
 .timeline {
   position: relative;
   max-width: 900px;
