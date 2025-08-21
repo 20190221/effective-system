@@ -15,93 +15,66 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Header -->
-  <header class="navbar">
-    <div class="logo"><a href="index.html">Website-title</a></div>
-    <button class="menu-toggle" aria-label="Open menu">MENU</button>
-  </header>
-  <!-- Main -->
-   <header class="navbar">
-  <div class="menu-toggle" id="menu-toggle">
-  <span class="bar"></span>
-  <span class="bar"></span>
-  <span class="bar"></span>
-</div>
-<nav class="side-menu">
-  <div class="backgroundimg"></div>
-  <div class="menu-images">
-    <a href="Japan.html" class="menu-item">
-      <img src="images/일본.jpg" alt="Japan">
-    </a>
-    <a href="China.html" class="menu-item">
-      <img src="images/중국.jpg" alt="China">
-    </a>
-    <a href="Korea.html" class="menu-item">
-      <img src="images/한국.jpg" alt="Korea">
-    </a>
+<!-- Header -->
+<header class="navbar">
+  <div class="navbar-left">
+    <a href="index.html" class="logo">浅野様の朝から夜まで。</a>
   </div>
+  <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">MENU</button>
+</header>
+<nav class="side-menu" id="side-menu">
+  <a href="index.html" class="side-button home">HOME</a>
+  <a href="Japan.html" class="side-button japan current">JAPAN</a>
+  <a href="China.html" class="side-button china">CHINA</a>
+  <a href="Korea.html" class="side-button korea">KOREA</a>
+  <a href="composer.html" class="side-button composer">COMPOSER</a>
 </nav>
-  <main class="container">
-    <!-- Section 1 -->
-    <section class="film-section reveal">
-      <div class="film-photo">
-        <img src="images/입사계기.png" alt="入社のきっかけ" />
-        <span class="film-date">2025.02 JAPAN</span>
-      </div>
-      <div class="film-note">
-        <h2>入社のきっかけ</h2>
-        <p>
+  <main>
+    <div class="timeline">
+      <div class="timeline-item left">
+        <div class="content">
+          <h2>Q. 入社のきっかけ</h2>
+          <p>
           太平洋工業に入社した理由は、地元の会社であり、「何をやりたいか」を真剣に聞いてくれた数少ない会社の一つでした。
           設計・開発を希望し、その仕事を任せてもらえることになりました。自分が設計・開発した部品が中国で販売され、中国赴任となりました。
-        </p>
+          </p>
+        </div>
       </div>
-    </section>
 
-    <!-- Section 2 -->
-    <section class="film-section reverse reveal">
-      <div class="film-photo">
-        <img src="images/회사 업무.png" alt="新人の時に大変だったこと" />
-        <span class="film-date">2025.02 JAPAN</span>
+      <div class="timeline-item right">
+        <div class="content">
+          <h2>Q. 新人の時に大変だったこと</h2>
+          <p>
+             大学で学んだことは基礎に過ぎず、実製品の設計は難易度が高いものでした。コンセプトと考え方を明確に整理できていないと、しばしばやり直しになり、考え抜く力が身につきました。
+          </p>
+        </div>
       </div>
-      <div class="film-note">
-        <h2>新人の時に大変だったこと</h2>
-        <p>
-          大学で学んだことは基礎に過ぎず、実製品の設計は難易度が高いものでした。コンセプトと考え方を明確に整理できていないと、しばしばやり直しになり、考え抜く力が身につきました。
-        </p>
-      </div>
-    </section>
 
-    <!-- Section 3 -->
-    <section class="film-section reveal">
-      <div class="film-photo">
-        <img src="images/좀 더 공부.png" alt="日本に行く前に準備すると良いこと" />
-        <span class="film-date">2025.02 JAPAN</span>
+      <div class="timeline-item left">
+        <div class="content">
+          <h2>Q. 日本に行く前に準備すると良いこと</h2>
+          <p>
+            日本の会社は判断や結論が遅い傾向があります。そのスピードを高めるには、相手を動かす「説得力」を磨くことが大切です。
+           （日本語力の上達には、日常での交流も効果的です）
+          </p>
+        </div>
       </div>
-      <div class="film-note">
-        <h2>日本に行く前に準備すると良いこと</h2>
-        <p>
-          日本の会社は判断や結論が遅い傾向があります。そのスピードを高めるには、相手を動かす「説得力」を磨くことが大切です。
-          （日本語力の上達には、日常での交流も効果的です）
-        </p>
-      </div>
-    </section>
   </main>
 
   <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-content">
-      <p class="footer-logo"><a href="index.html">Website-title</a></p>
+      <p class="footer-logo"><a href="index.html">浅野様の朝から夜まで。</a></p>
       <ul class="footer-nav">
         <li><a href="index.html">HOME</a></li>
         <li><a href="Japan.html">Japan</a></li>
         <li><a href="China.html">China</a></li>
         <li><a href="Korea.html">Korea</a></li>
-        <li><a href="end.html">ADVICE</a></li>
         <li><a href="composer.html">COMPOSER</a></li>
       </ul>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2025 Website-title. All rights reserved.</p>
+      <p>&copy; 2025 浅野様の朝から夜まで。 All rights reserved.</p>
     </div>
   </footer>
 
@@ -110,4 +83,3 @@
   <script src="style.js"></script>
 </body>
 </html>
-
