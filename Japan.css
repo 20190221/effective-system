@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+body {
+  background: linear-gradient(
+    to bottom,
+    #FFCC99 0%,   
+    #FFF5CC 50%,  
+    #eef6ff 100%  
+  );
+}
+
 .timeline {
   position: relative;
   max-width: 900px;
@@ -198,3 +207,4 @@
   border-color: #212cff;
   box-shadow: 0 6px 20px rgba(248, 181, 0, 0.4);
 }
+
