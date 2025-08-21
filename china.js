@@ -1,29 +1,3 @@
-// 메뉴 토글 기능
-const menuToggle = document.querySelector('.menu-toggle');
-const sideMenu = document.querySelector('.side-menu');
-let isMenuOpen = false;
-
-menuToggle.addEventListener('click', () => {
-  if (!isMenuOpen) {
-    sideMenu.style.left = '0';
-    isMenuOpen = true;
-    menuToggle.textContent = 'CLOSE';
-  } else {
-    sideMenu.style.left = '-250px';
-    isMenuOpen = false;
-    menuToggle.textContent = 'MENU';
-  }
-});
-
-// 메뉴 외부 클릭시 메뉴 닫기
-document.addEventListener('click', (e) => {
-  if (!sideMenu.contains(e.target) && !menuToggle.contains(e.target) && isMenuOpen) {
-    sideMenu.style.left = '-250px';
-    isMenuOpen = false;
-    menuToggle.textContent = 'MENU';
-  }
-});
-
 // 스크롤 애니메이션
 const observerOptions = {
   threshold: 0.1,
