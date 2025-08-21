@@ -8,7 +8,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Reggae+One&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
-  <title>interview-title</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap" rel="stylesheet">
+  <title>浅野様の朝から夜まで。</title>
 </head>
 <body>
   <div class="intro-screen">
@@ -16,27 +18,14 @@
     <h1 class="intro-title">浅野様の朝から夜まで。</h1>
   </div>
 <header class="navbar">
-  <div class="logo">
-     <a href="index.html"></a></div>
-  <div class="menu-toggle" id="menu-toggle">
-  <span class="bar"></span>
-  <span class="bar"></span>
-  <span class="bar"></span>
-</div>
+  <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">MENU</button>
 </header>
-<nav class="side-menu">
-  <div class="backgroundimg"></div>
-  <div class="menu-images">
-    <a href="Japan.html" class="menu-item">
-      <img src="images/일본.jpg" alt="Japan">
-    </a>
-    <a href="China.html" class="menu-item">
-      <img src="images/중국.jpg" alt="China">
-    </a>
-    <a href="Korea.html" class="menu-item">
-      <img src="images/한국.jpg" alt="Korea">
-    </a>
-  </div>
+<nav class="side-menu" id="side-menu">
+  <a href="index.html" class="side-button home current">HOME</a>
+  <a href="Japan.html" class="side-button japan">JAPAN</a>
+  <a href="China.html" class="side-button china">CHINA</a>
+  <a href="Korea.html" class="side-button korea">KOREA</a>
+  <a href="composer.html" class="side-button composer">COMPOSER</a>
 </nav>
 <main>
   <!-- 속표지: 한 화면 전체 차지 -->
@@ -81,12 +70,12 @@
           <h1>「太平洋バルブ工業株式会社」</h1>
           <P>設立：1987年5月29日<br>
              職員数：60 <br>
-             エピローグ： <br>
+             事業内容： <br>
              インタビューでは紹介しませんでしたが、太平洋バルブ工業がめざす姿の一つに<br>
              『人財育成とともに、社会課題を解決する「ものづくり」で、<br>
              地域に貢献する地域密着型企業であり続けるというテーマがあります。<br>
              私たちの会社では、「人材育成」ではなく 「人財育成」と書きます。<br>
-             これは、「人は財産である」という考えによるものです。<br>
+             これは、「人は財産である」という考えよるものです。<br>
              これから社会に出る若い世代の皆さんは、まさに「人財」であり、<br>
              地域への貢献として、ご協力させていただきました。</P>
         </div>
@@ -140,5 +129,3 @@
     <script src="index.js"></script>
 </body>
 </html>
-
-
