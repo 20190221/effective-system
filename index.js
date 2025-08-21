@@ -1,22 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => { 
   const slides = [
     {
-      image: "images/retsya1.jpg",
+      image: "images/retsya1-1.jpg",
       title: "日本",
       text: "始まった浅野さんのキャリア、その原点とは？",
-      color: "#18149bff",  
+      gradient: "linear-gradient(90deg, #FFDEE9, #B5FFFC)" // 아침
     },
     {
-      image: "images/retsya2.jpg",
+      image: "images/retsya2-1.jpg",
       title: "中国",
-      text: "中国で得た淺野さんの経験、その成長の秘密とは？",
-      color: "#ffae00ff"
+      text: "中国で得た浅野さんの経験、その成長の秘密とは？",
+      gradient: "linear-gradient(90deg, #FFB347, #FFCC33)" // 점심
     },
     {
-      image: "images/retsya3.jpg",
+      image: "images/retsya3-2.jpg",
       title: "韓国",
       text: "日本、中国に続いて韓国にやってきた浅野さん。 叶えたい目標は？",
-      color: "#00ffcc"
+      gradient: "linear-gradient(90deg, #FF5F6D, #FFC371)" // 저녁
     }
   ];
 
@@ -54,9 +54,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const currentSlide = slides[currentIndex];
       backgroundLayer.style.backgroundImage = `url('${currentSlide.image}')`;
 
+      // 텍스트에 그라데이션 적용
       textContainer.innerHTML = `
-        <h1 style="color:${currentSlide.color}">${currentSlide.title}</h1>
-        <p style="color:${currentSlide.color}">${currentSlide.text}</p>
+        <h1 style="
+          background: ${currentSlide.gradient};
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-weight: bold;
+        ">${currentSlide.title}</h1>
+        <p style="
+          background: ${currentSlide.gradient};
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-weight: bold;
+        ">${currentSlide.text}</p>
       `;
 
       requestAnimationFrame(() => {
@@ -149,22 +160,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       boxes.forEach(box => mottoObserver.observe(box));
     }, { once: true });
-  }, 4000);  // 4초 유지
+  }, 4000);
 
-  // ------------------------------
-  // 여기서부터 introduce-text 스크롤 등장 애니메이션 추가
+  // introduce-text 스크롤 등장 애니메이션
   const introduceText = document.querySelector(".introduce-text");
 
   const introduceObserver = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add("show"); // CSS show 클래스 활성화
-        obs.unobserve(entry.target); // 한 번만 실행
+        entry.target.classList.add("show");
+        obs.unobserve(entry.target);
       }
     });
   }, { threshold: 0.5 });
 
   introduceObserver.observe(introduceText);
 });
-
-
