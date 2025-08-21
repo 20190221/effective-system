@@ -28,7 +28,7 @@ footer {
   color: none;
 }
 
-/* ===== Navbar ===== */
+/* --- Navbar --- */
 .navbar {
   position: fixed;
   top: 0;
@@ -36,56 +36,52 @@ footer {
   width: 100%;
   height: 80px;
   background-color: transparent;
-  color: black;
-  transition: background-color 0.3s ease, color 0.3s ease;
   z-index: 11000;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 0 40px;
 }
 
-.navbar-left {
-  width: 2rem; /* 로고 공간 유지 */
-}
-
-.navbar.hidden {
-  top: -100px;
-  transition: top 0.3s ease;
-}
-
-/* ===== Menu Toggle ===== */
+/* 햄버거 버튼 박스 */
 .menu-toggle {
-  position: absolute;      /* navbar 기준 위치 */
-  top: 0;                  /* navbar 상단과 맞춤 */
-  right: 0;                /* navbar 오른쪽 끝과 맞춤 */
-  height: 100%;            /* navbar 높이와 동일 */
+  position: relative;
+  width: 60px;        /* 버튼 너비 */
+  height: 50px;       /* 버튼 높이 */
   display: flex;
-  align-items: center;     /* 버튼 텍스트 세로 가운데 정렬 */
-  padding: 0 20px;         /* 오른쪽 안쪽 여백 */
-  background: none;
-  border: none;
-  font-size: 1rem;
-  font-weight: bold;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   cursor: pointer;
-  color: #1d4ed8;
-  transition: color 0.3s ease;
-  z-index: 12002;          /* side-menu보다 위 */
+  background-color: #eef6ff; /* 기본 배경 */
+  border-radius: 12px;
+  border: 2px solid rgba(67, 55, 55, 0.848);
+  padding: 8px 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  z-index: 12000;
 }
 
-.menu-toggle:hover { 
-  color: var(--blue-700); 
-}
-
-.menu-toggle span.bar {
-  display: block;
+/* 햄버거 바 */
+.menu-toggle .bar {
+  width: 30px;
   height: 4px;
-  width: 100%;
-  background-color: #eef6ff;
-  border-radius: 10px;
-  transition: all 0.4s ease-in-out;
+  background-color: rgba(67, 55, 55, 0.848);
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
 }
 
+/* 메뉴 열렸을 때 버튼 박스 색상 변경 */
+.menu-toggle.active {
+  background-color: rgba(67, 55, 55, 0.848); /* 배경 색 변경 */
+  border-color: rgba(67, 55, 55, 0.848);
+}
+
+/* 메뉴 열렸을 때 바 색상 변경 */
+.menu-toggle.active .bar {
+  background-color: #eef6ff;
+}
+
+/* --- Side Menu --- */
 .side-menu {
   position: fixed;
   top: 0;
@@ -93,10 +89,10 @@ footer {
   width: 100%;
   height: 50vh;
   z-index: 10000;
-  visibility: hidden;
+  opacity: 0;                  /* visibility 대신 opacity 사용 */
   pointer-events: none;
   transform: translateY(-100%);
-  transition: transform 0.5s ease, visibility 0.5s ease;
+  transition: transform 0.5s ease, opacity 0.5s ease;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -111,32 +107,33 @@ footer {
   left: 5%;
   right: 5%;
   height: 24px; 
-  background-color: #0047AB; /* 파란색 노선 */
+  background-color: #0047AB; 
   z-index: 0;
   border-radius: 10px;
 }
 
+/* 메뉴 열림 상태 */
 .side-menu.open {
-  visibility: visible;
+  opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
 }
 
-/* 역 버튼 */
+/* --- 역 버튼 --- */
 .side-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 140px;   /* 버튼 크기 증가 */
-  height: 140px;  /* 버튼 크기 증가 */
-  margin: 0 20px; /* 버튼 간격 증가 */
+  width: 140px;
+  height: 140px;
+  margin: 0 20px;
   background-color: #ffffff;
-  border: 5px solid #0047AB; /* 테두리 두껍게 */
+  border: 5px solid #0047AB;
   color: #0047AB;
   text-decoration: none;
   border-radius: 50%;
   font-weight: bold;
-  font-size: 24px; /* 글자 크기 증가 */
+  font-size: 24px;
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
   position: relative;
   z-index: 1;
@@ -144,26 +141,25 @@ footer {
 }
 
 .side-button:nth-child(1),
-.side-button:nth-child(5) { /* 5번 버튼도 적용 */
+.side-button:nth-child(5) {
   width: 180px;
   height: 180px;
   font-size: 36px;
-  background-color: #0047AB; /* 종점 버튼 채움 */
-  color: #ffffff;            /* 글자 흰색 */
+  background-color: #0047AB;
+  color: #ffffff;
 }
 
-
 .side-button:hover {
-  transform: scale(1.25); /* 확대 효과 증가 */
+  transform: scale(1.25);
   box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-  background-color: #ADD8E6; /* 호버 시 연한 파랑 */
+  background-color: #ADD8E6;
 }
 
 .side-button.current::after {
   content: "🚆";  
   position: absolute;
-  top: -30px;      /* 버튼 위로 위치 조정 */
-  font-size: 48px; /* 필요에 따라 크기 조정 */
+  top: -30px;
+  font-size: 48px;
 }
 
 
@@ -245,7 +241,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 12001;
   overflow: hidden;
   background: black; /* 배경 깜빡임 방지 */
   opacity: 1;
@@ -321,7 +317,7 @@ main {
 .example-section {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
   font-family: 'Yuji Syuku', serif;
   margin: 0;
@@ -333,7 +329,7 @@ main {
   width: 100%; height: 100%;
   background-size: cover;
   background-position: center;
-  transition: background-image 1s ease-in-out;
+  transition: background-image 1.5s ease-in-out;
   z-index: 0;
 }
 
@@ -429,7 +425,7 @@ main {
   transform: translateX(50px);
 }
 
-/* -------------팀 소개 섹션--------------- */
+/* -------------Gallery--------------- */
 .film-section {
   width: 100%;
   overflow: hidden;
@@ -481,7 +477,7 @@ main {
   max-width: 1800px;      /* 전체 카드 최대 넓이 확대 */
   margin: 200px auto;      /* 위아래 여유 증가 */
   padding: 80px 60px;      /* 카드 내부 여백 확대 */
-  background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+  background: linear-gradient(to bottom, #eef6ff, #dffcf1, #ccefff);
   border-radius: 30px;      /* 모서리 좀 더 둥글게 */
   box-shadow: 0 16px 32px rgba(0,0,0,0.18); /* 그림자 강조 */
   will-change: opacity, transform;
@@ -533,29 +529,28 @@ main {
   flex: 1;
   font-size: 1.6rem;      /* 텍스트 크기 확대 */
   line-height: 1.8;
-  color: #fff;
+  color: #14151768;
   text-align: center;
 }
 
 /* 이름 제목 */
 .profile-text h1 {
-  font-family: 'Kosugi Maru', cursive;
-  font-size: 3.5rem;      /* 제목 크기 확대 */
+  font-family: 'Yuji Syuku', cursive;
+  font-size: 4rem;      /* 제목 크기 확대 */
   margin-bottom: 16px;
-  color: #fff;
   text-shadow: 0 3px 6px rgba(0,0,0,0.35);
 }
 
 /* 문단 */
 .profile-text p {
-  font-family: 'Kosugi Maru', cursive;
-  margin-bottom: 12px;
-  color: #fff;
+  font-family: 'Yuji Syuku', cursive;
+  margin-bottom: 20px;
   text-shadow: 0 2px 4px rgba(0,0,0,0.25);
 }
 
 /* ------------------회사 소개--------------------- */
 .company-wrapper {
+  position: relative;
   background-image: url(images/3.中国_青島太平洋.jpg);
   background-size: cover;
   background-position: center;
@@ -567,18 +562,32 @@ main {
   padding-left: 5%;
 }
 
+.company-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* 검은 반투명 오버레이 */
+  z-index: 1;
+}
+
+.company-wrapper > * {
+  position: relative;
+  z-index: 2; /* 텍스트가 오버레이 위로 나오도록 */
+}
 .introduce-text {
   position: relative;
   z-index: 2;
   background: none;
-  color: #FFFDF5;
+  color: #f4ebf2;
   padding: 2.5rem 3.5rem;
   max-width: 850px;
   margin-left: 5%;
   line-height: 2.2;
-  font-family: 'Kosugi Maru', sans-serif;
   text-align: left;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  text-shadow:
+  1px 1px 2px rgba(0,0,0,0.5),
+  2px 2px 5px rgba(0,0,0,0.3);
 }
 
 /* 글자 등장 기본 상태 */
@@ -597,15 +606,16 @@ main {
 }
 
 .introduce-text h1 {
-  font-family: 'Kosugi Maru', sans-serif;
+  font-family: 'Yuji Syuku', cursive;
   font-size: 3rem;
   margin-bottom: 1.8rem;
-  font-weight: 300;
+  font-weight: 900;
 }
 
 .introduce-text p {
+  font-family: 'Yuji Syuku', cursive;
   font-size: 1.4rem;
-  font-weight: 300;
+  font-weight: 900;
 }
 
 /* ------------------어드바이스--------------------- */
