@@ -4,7 +4,6 @@ body {
   background:linear-gradient(#eef6ff 20%,#ffd50063);
 }
 
-
 .timeline {
   position: relative;
   max-width: 900px;
@@ -56,7 +55,10 @@ body {
 /* 왼쪽 역 위치 */
 .timeline-item.left {
   left: 0;
+  width: 70%;
   text-align: right;
+  transform: translateY(50px) scale(0.9);
+  margin-left: -20%; /* 바깥으로 확장 */
 }
 
 .timeline-item.left::before {
@@ -65,7 +67,10 @@ body {
 
 /* 오른쪽 역 위치 */
 .timeline-item.right {
-  left: 50%;
+  left: 50%;            /* 중앙선 기준 */
+  width: 60%;           /* 원하는 폭 */
+  text-align: left;
+  transform: translateX(0) translateY(50px) scale(0.9);
 }
 
 .timeline-item.right::before {
