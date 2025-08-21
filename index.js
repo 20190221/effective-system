@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       image: "images/retsya2.jpg",
       title: "中国",
-      text: "中国で直面した。。。",
+      text: "中国で得た淺野さんの経験、その成長の秘密とは？",
       color: "#ffae00ff"
     },
     {
@@ -166,4 +166,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   introduceObserver.observe(introduceText);
 });
+
 
