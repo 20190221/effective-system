@@ -13,7 +13,7 @@ body {
 
 .timeline {
   position: relative;
-  max-width: 900px;
+  max-width: 1300px;
   margin: 4rem auto;
   padding: 2rem 0;
 }
@@ -93,6 +93,16 @@ body {
   cursor: pointer;
   overflow: hidden;
   text-align: left;
+}
+
+.timeline-item .content img.content-image {
+  max-width: 100%;   /* 텍스트 박스 폭에 맞춤 */
+  height: auto;      /* 비율 유지 */
+  display: block;
+  margin: 1.5rem 0;  /* 위아래 여백 */
+  border-radius: 8px;
+  border: 2px solid #001d6c;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 /* 호버 시 3D 틸트 + 확대 효과 */
