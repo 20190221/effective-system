@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+body {
+  background:linear-gradient(#eef6ff 20%,#ffd50063);
+}
+
+
 .timeline {
   position: relative;
   max-width: 900px;
