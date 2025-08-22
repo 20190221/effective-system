@@ -182,8 +182,11 @@ body {
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   transition: all 0.3s ease;
   animation: pulse 2s ease-in-out infinite;
-  z-index: 2;
 }
+.timeline-item {
+  z-index: 100;
+}
+
 @keyframes pulse {
   0%,100% {
     transform: translateX(-50%) scale(1);
