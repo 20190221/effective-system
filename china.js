@@ -17,3 +17,19 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.timeline-item').forEach(item => {
   observer.observe(item);
 });
+
+function initWaveCursor() {
+    document.body.classList.add('wave-cursor');
+    
+    document.addEventListener('click', function(e) {
+        const wave = document.createElement('div');
+        wave.className = 'wave-ring';
+        wave.style.left = e.clientX + 'px';
+        wave.style.top = e.clientY + 'px';
+        document.body.appendChild(wave);
+        
+        setTimeout(() => wave.remove(), 600);
+    });
+}
+// 기존 코드 아래에 호출 추가
+initWaveCursor();
