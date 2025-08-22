@@ -199,6 +199,9 @@ body {
   transition: all 0.3s ease;
   animation: pulse 2s ease-in-out infinite;
 }
+.timeline-item {
+  z-index: 100;
+}
 
 @keyframes pulse {
   0%, 100% { 
@@ -217,4 +220,5 @@ body {
   border-color: #212cff;
   box-shadow: 0 6px 20px rgba(248, 181, 0, 0.4);
 }
+
 
