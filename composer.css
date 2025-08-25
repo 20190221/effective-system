@@ -198,30 +198,33 @@
   color: #004080;
 }
 
-/* ---------------- 모달 ---------------- */
+/* ================= 모달 ================= */
 .modal {
   display: none;
-  position: fixed; top:0; left:0; right:0; bottom:0;
-  justify-content: center; align-items: center;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  justify-content: center;
+  align-items: center;
   z-index: 9999;
-  background: rgba(0,0,0,0.2);
-  backdrop-filter: blur(3px);
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
 }
 
 .modal-content {
-  background: #fff9d9;
-  padding: 2.5rem 2rem;
-  border-radius: 15px;
-  max-width: 800px; width: 90%;
-  text-align: center;
+  background: #fff;
+  border-radius: 16px;
+  max-width: 900px;
+  max-height: 80%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   position: relative;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-  border-top: 5px solid #ffda6c;
-
-  transform: translateY(50px) scale(0.85);
-  opacity: 0;
-  transition: transform 0.5s cubic-bezier(0.25, 1.25, 0.5, 1), opacity 0.5s ease;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
   font-family: 'Noto Sans JP', sans-serif;
+  transform: translateY(50px) scale(0.95);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
 .modal.show .modal-content {
@@ -229,118 +232,198 @@
   opacity: 1;
 }
 
-.modal-content h2 {
-  margin-bottom: 1rem;
-  text-align: left;
-  color: #4a3b00;
-  font-size: 2.2rem;
-  font-weight: 700;
+/* ---------- 상단 프로필 ---------- */
+.modal-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+}
+.modal-header img {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+.modal-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  color: #222;
 }
 
-.modal-content p {
-  text-align: left;
-  font-size: 1.4rem;
-  line-height: 1.8;
-  color: #3e2f00;
-}
-
-.modal-content img {
+/* ---------- 대표 이미지 ---------- */
+.modal-main-image {
   width: 100%;
   height: auto;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  max-height: 50vh;
+  object-fit: contain;
+  display: block;
+  background: #f0f0f0;
 }
 
+/* ---------- 하단 액션 버튼 영역 ---------- */
+.modal-actions {
+  display: flex;
+  gap: 16px;
+  padding: 12px 16px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.modal-actions button:hover {
+  transform: scale(1.3);
+}
+
+/* 좋아요 버튼 초기 흰색, 클릭 시 빨강 */
+.modal-actions .like-btn {
+  color: #fff;
+}
+.modal-actions .like-btn.liked {
+  color: #e74c3c;
+}
+
+/* 댓글 버튼 */
+.modal-actions .comment-btn {
+  color: #007BFF;
+}
+
+/* ---------- 자기소개 본문 ---------- */
+.modal-body {
+  padding: 16px;
+  flex: 2;
+  overflow-y: auto;
+}
+
+.modal-body p {
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: #333;
+  margin: 0 0 12px;
+  white-space: pre-line;
+}
+
+/* ---------- 닫기 버튼 ---------- */
 .close {
   position: absolute;
-  top: 15px; right: 20px;
-  font-size: 2rem;
-  color: #4a3b00;
+  top: 12px; right: 16px;
+  font-size: 1.8rem;
+  color: #555;
   cursor: pointer;
   user-select: none;
   transition: transform 0.2s ease, color 0.2s ease;
 }
-
 .close:hover {
-  color: #ffb700;
+  color: #000;
   transform: scale(1.2);
 }
+
+/* ---------- 댓글 영역 ---------- */
+.comment-wrapper {
+  margin-top: 12px;
+}
+
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.comment-item {
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 고정 댓글용 아이콘 스타일 */
+.fixed-comment {
+  gap: 12px;
+}
+.social-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: #333;
+  transition: transform 0.2s, stroke 0.2s;
+}
+
+.social-icon:hover svg {
+  transform: scale(1.2);
+  stroke: #007BFF;
+}
+
+/* 댓글 입력 영역 */
+.comment-input {
+  display: flex;
+  padding: 8px 0;
+  gap: 8px;
+  border-top: 1px solid #eee;
+}
+.comment-input input {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.comment-input button {
+  padding: 6px 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+.comment-input button:hover {
+  background-color: #0056b3;
+}
+
+
 
 /* ===================== 반응형 ===================== */
 
 /* 📱 모바일 (최대 768px) */
 @media (max-width: 768px) {
-  .team-setumei {
-    padding: 30px 20px;
-    font-size: 1.4rem;
-  }
+  .team-setumei { padding: 30px 20px; font-size: 1.4rem; }
   .team-setumei h1 { font-size: 2.2rem; }
-  .team-setumei h2 { font-size: 1.8rem; }
+  .team-setumei h2 { font-size: 2rem; } /* H2 글자 키움 */
 
-  .team-photo-wrapper {
-    margin: 200px 0; /* 너무 큰 여백 축소 */
-    flex-direction: column;
-    padding: 0 10px;
-  }
-  .photo-text {
-    font-size: 1.6rem;
-    padding: 15px;
-    max-width: 95%;
-  }
+  .team-photo-wrapper { margin: 150px 0; flex-direction: column; padding: 0 10px; }
+  .photo-text { font-size: 1.6rem; padding: 15px; max-width: 95%; }
 
-  .creators {
-    margin: 200px 0;
-    height: auto;
-    gap: 40px;
-  }
-  .creator-list {
-    flex-direction: column;
-    gap: 30px;
-  }
-  .creator img {
-    height: auto;
-    max-height: 400px;
-  }
-  .creator p {
-    font-size: 1rem;
-  }
+  .creators { margin: 150px 0; height: auto; gap: 40px; }
+  .creator-list { flex-direction: column; gap: 30px; }
+  .creator img { height: auto; max-height: 50vh; }
+  .creator p { font-size: 1rem; }
 
-  .modal-content {
-    padding: 1.5rem;
-    font-size: 1.2rem;
-  }
+  .modal-content { padding: 1.5rem; font-size: 1.4rem; } /* 글자 키움 */
   .modal-content h2 { font-size: 1.6rem; }
-  .modal-content p { font-size: 1.2rem; }
+  .modal-content p { font-size: 1.4rem; line-height: 1.6; }
 }
 
 /* 💻 태블릿 (769px ~ 1200px) */
 @media (min-width: 769px) and (max-width: 1200px) {
-  .team-setumei {
-    padding: 40px;
-  }
+  .team-setumei { padding: 40px; }
   .team-setumei h1 { font-size: 3rem; }
   .team-setumei h2 { font-size: 2.4rem; }
 
-  .team-photo-wrapper {
-    margin: 300px 0;
-    padding: 0 20px;
-  }
-  .photo-text {
-    font-size: 2rem;
-  }
+  .team-photo-wrapper { margin: 250px 0; padding: 0 20px; }
+  .photo-text { font-size: 2rem; }
 
-  .creators {
-    margin: 300px 0;
-    height: auto;
-  }
-  .creator img {
-    height: 450px;
-  }
-  .creator p {
-    font-size: 1.1rem;
-  }
-  .modal-content {
-    max-width: 700px;
-  }
+  .creators { margin: 250px 0; height: auto; }
+  .creator img { height: 450px; }
+  .creator p { font-size: 1.1rem; }
+  .modal-content { max-width: 700px; font-size: 1.5rem; }
+  .modal-content h2 { font-size: 1.6rem; }
+  .modal-content p { font-size: 1.5rem; line-height: 1.6; }
 }
