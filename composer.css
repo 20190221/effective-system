@@ -267,27 +267,80 @@
   transform: scale(1.2);
 }
 
-/* 마우스 클릭 커서 */
-.wave-ring {
-    position: fixed;
-    border: 2px solid rgba(0, 150, 255, 0.6);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    animation: waveExpand 0.6s ease-out forwards;
-    transform: translate(-50%, -50%); /* 클릭 좌표 중심 기준 */
+/* ===================== 반응형 ===================== */
+
+/* 📱 모바일 (최대 768px) */
+@media (max-width: 768px) {
+  .team-setumei {
+    padding: 30px 20px;
+    font-size: 1.4rem;
+  }
+  .team-setumei h1 { font-size: 2.2rem; }
+  .team-setumei h2 { font-size: 1.8rem; }
+
+  .team-photo-wrapper {
+    margin: 200px 0; /* 너무 큰 여백 축소 */
+    flex-direction: column;
+    padding: 0 10px;
+  }
+  .photo-text {
+    font-size: 1.6rem;
+    padding: 15px;
+    max-width: 95%;
+  }
+
+  .creators {
+    margin: 200px 0;
+    height: auto;
+    gap: 40px;
+  }
+  .creator-list {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .creator img {
+    height: auto;
+    max-height: 400px;
+  }
+  .creator p {
+    font-size: 1rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+    font-size: 1.2rem;
+  }
+  .modal-content h2 { font-size: 1.6rem; }
+  .modal-content p { font-size: 1.2rem; }
 }
 
-@keyframes waveExpand {
-    0% {
-        width: 0;
-        height: 0;
-        opacity: 1;
-    }
-    100% {
-        width: 60px;
-        height: 60px;
-        opacity: 0;
-        transform: translate(-30px, -30px);
-    }
+/* 💻 태블릿 (769px ~ 1200px) */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .team-setumei {
+    padding: 40px;
+  }
+  .team-setumei h1 { font-size: 3rem; }
+  .team-setumei h2 { font-size: 2.4rem; }
+
+  .team-photo-wrapper {
+    margin: 300px 0;
+    padding: 0 20px;
+  }
+  .photo-text {
+    font-size: 2rem;
+  }
+
+  .creators {
+    margin: 300px 0;
+    height: auto;
+  }
+  .creator img {
+    height: 450px;
+  }
+  .creator p {
+    font-size: 1.1rem;
+  }
+  .modal-content {
+    max-width: 700px;
+  }
 }
