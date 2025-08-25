@@ -727,3 +727,196 @@ main {
         transform: translate(-30px, -30px);
     }
 }
+
+/* ================= 반응형 ================= */
+
+/* 태블릿 (최대 1024px) */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 0 20px;
+    height: 70px;
+  }
+
+  .side-button {
+    width: 120px;
+    height: 120px;
+    font-size: 20px;
+    margin: 0 10px;
+  }
+  .side-button:nth-child(1),
+  .side-button:nth-child(5) {
+    width: 150px;
+    height: 150px;
+    font-size: 28px;
+  }
+
+  .content-layer {
+    padding: 120px 80px;
+  }
+
+  .example-text h1 {
+    font-size: 54px;
+  }
+  .example-text p {
+    font-size: 28px;
+  }
+
+  .profile-wrapper {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .profile-wrapper img {
+    width: 450px;
+    height: 420px;
+  }
+  .profile-text h1 {
+    font-size: 3rem;
+  }
+}
+
+/* 모바일 (최대 768px) */
+@media (max-width: 768px) {
+  .menu-toggle {
+    width: 50px;
+    height: 40px;
+  }
+  .side-menu {
+    flex-direction: column;          /* 버튼들을 세로로 배치 */
+    justify-content: center;
+    height: 100vh;                   /* 화면 전체 높이 */
+    transform: translateY(-100%);
+  }
+
+  /* 지하철 선 세로로 */
+  .side-menu::before {
+    top: 5%;
+    bottom: 5%;
+    left: 50%;
+    right: auto;
+    width: 24px;                     /* 가로 → 세로 변경 */
+    height: auto;
+    border-radius: 10px;
+  }
+
+  /* 버튼 크기 조금 줄임 */
+  .side-button {
+    width: 120px;
+    height: 120px;
+    font-size: 20px;
+    margin: 20px 0;
+  }
+
+  .side-button:nth-child(1),
+  .side-button:nth-child(5) {
+    width: 150px;
+    height: 150px;
+    font-size: 28px;
+  }
+
+  /* 🚆 아이콘도 위쪽 대신 좌측 정렬 */
+  .side-button.current::after {
+    top: 50%;
+    left: -50px;
+    transform: translateY(-50%);
+    font-size: 36px;
+  }
+  .example-text h1 {
+    font-size: 38px;
+  }
+  .example-text p {
+    font-size: 22px;
+  }
+
+  .film-header h1 {
+    font-size: 42px;
+  }
+
+  .profile-wrapper img {
+    width: 320px;
+    height: 320px;
+  }
+
+  .profile-text {
+    font-size: 1.2rem;
+    padding: 0 10px;
+  }
+  .profile-text h1 {
+    font-size: 2.2rem;
+  }
+
+.introduce-text {
+  margin-left: 0;
+  padding: 0.1rem;        /* 패딩 더 줄임 */
+  font-size: 0.08rem;      /* 글자 크기 더 작게 */
+  text-align: left;
+  line-height: 0.9;        /* 줄 간격 축소 */
+}
+
+  .motto {
+    flex-direction: column;
+    padding: 0 20px 60px;
+  }
+  .motto > div {
+    padding: 30px;
+  }
+  .motto h1 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  .motto p {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+}
+
+/* 초소형 모바일 (최대 480px) */
+@media (max-width: 480px) {
+  .intro-title {
+    font-size: 36px;
+    padding: 0 10px;
+  }
+
+  .side-button {
+    width: 80px;
+    height: 80px;
+    font-size: 14px;
+  }
+  .side-button:nth-child(1),
+  .side-button:nth-child(5) {
+    width: 100px;
+    height: 100px;
+    font-size: 18px;
+  }
+
+  .example-text h1 {
+    font-size: 28px;
+  }
+  .example-text p {
+    font-size: 18px;
+  }
+
+  .film-header h1 {
+    font-size: 28px;
+  }
+
+  .profile-wrapper img {
+    width: 240px;
+    height: 240px;
+  }
+
+  .profile-text {
+    font-size: 1rem;
+  }
+  .profile-text h1 {
+    font-size: 1.8rem;
+  }
+
+  .introduce-text h1 {
+    font-size: 1.6rem;
+  }
+  .introduce-text p {
+    font-size: 1rem;
+  }
+}
+
+
