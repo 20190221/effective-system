@@ -217,27 +217,54 @@ body {
   box-shadow: 0 6px 20px rgba(248, 181, 0, 0.4);
 }
 
-/* 마우스 클릭 커서 */
-.wave-ring {
-    position: fixed;
-    border: 2px solid rgba(0, 150, 255, 0.6);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    animation: waveExpand 0.6s ease-out forwards;
-    transform: translate(-50%, -50%); /* 클릭 좌표 중심 기준 */
+/* --- 태블릿 이하 (최대 1024px) --- */
+@media (max-width: 1024px) {
+  .timeline {
+    max-width: 90%;
+  }
+  .timeline-item {
+    width: 80%;
+  }
+  .timeline-item.left {
+    margin-left: -10%;
+  }
+  .timeline-item.right {
+    left: 45%;
+  }
 }
 
-@keyframes waveExpand {
-    0% {
-        width: 0;
-        height: 0;
-        opacity: 1;
-    }
-    100% {
-        width: 60px;
-        height: 60px;
-        opacity: 0;
-        transform: translate(-30px, -30px);
-    }
+/* --- 모바일 (최대 768px) --- */
+@media (max-width: 768px) {
+  /* 레일 왼쪽으로 이동 */
+  .timeline::after {
+    left: 10px;  /* 레일 두께와 padding 고려 */
+    margin-left: 0;
+  }
+
+  /* 카드 전체 폭, 좌측 정렬 */
+  .timeline-item,
+  .timeline-item.left,
+  .timeline-item.right {
+    width: calc(100% - 50px);   /* 레일 공간 확보 */
+    margin: 2rem 0 2rem 40px;   /* 레일 오른쪽으로 여백 */
+    left: 0 !important;
+    text-align: left;
+  }
+
+  /* 🚉 아이콘 레일 위 완전히 겹치도록 조정 */
+  .timeline-item::before {
+    left: auto;    /* left 비활성화 */
+    right: calc(100% - 10px); /* 레일 두께 + 카드 여백을 계산하여 맞춤 */
+  }
+}
+
+/* --- 아주 작은 화면 (최대 480px) --- */
+@media (max-width: 480px) {
+  .timeline-item .content {
+    padding: 1.5rem; 
+    font-size: 0.9rem;
+  }
+  .timeline-item h2 {
+    font-size: 1.2rem;
+  }
 }
