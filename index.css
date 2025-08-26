@@ -313,12 +313,10 @@ main {
 }
 
 /* ------------------본문 콘텐츠--------------------- */
-/*---------------------------------
-   예제 섹션 (슬라이드)
----------------------------------*/
+
 .example-section {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
   font-family: 'Yuji Syuku', serif;
@@ -327,10 +325,8 @@ main {
 
 .background-layer {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background-size: cover;
   background-position: center;
   transition: background-image 1.5s ease-in-out;
@@ -346,12 +342,12 @@ main {
   align-items: flex-start;
   color: white;
   text-align: left;
-  padding: 240px; /* 글자 위치 유지 */
+  padding: 240px 240px;
 }
 
 .example-text h1 {
   font-size: 84px;
-  margin-top: 0;
+  margin-top: 0; /* 상단 여백 제거 */
   margin-bottom: 40px;
   font-family: 'Yuji Syuku', serif;
   font-weight: bold;
@@ -364,7 +360,6 @@ main {
   font-weight: bold;
 }
 
-/* 슬라이드 버튼 */
 .slide-btn {
   position: absolute;
   top: 50%;
@@ -378,11 +373,14 @@ main {
   cursor: pointer;
   user-select: none;
 }
+
 .slide-btn.prev { left: 20px; }
 .slide-btn.next { right: 20px; }
-.slide-btn:hover { background: rgba(0,0,0,0.7); }
 
-/* 슬라이드 인디케이터 */
+.slide-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
 .slide-indicators {
   position: absolute;
   bottom: 30px;
@@ -392,27 +390,42 @@ main {
   gap: 10px;
   z-index: 10;
 }
+
 .dot {
   width: 14px;
   height: 14px;
-  background-color: rgba(255,255,255,0.4);
+  background-color: rgba(255, 255, 255, 0.4);
   border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.3s;
 }
+
 .dot.active {
   background-color: white;
 }
 
-/* 애니메이션 유지 */
+/* 애니메이션 */
 .slide-anim {
   opacity: 0;
   transform: translateX(0);
   transition: transform 0.6s ease, opacity 0.6s ease;
 }
-.slide-anim.show { opacity: 1; }
-.from-left { transform: translateX(-50px); }
-.from-right { transform: translateX(50px); }
+
+.slide-anim.show {
+  opacity: 1;
+}
+
+/* 왼쪽에서 들어오기 */
+.from-left {
+  transform: translateX(-50px);
+}
+
+/* 오른쪽에서 들어오기 */
+.from-right {
+  transform: translateX(50px);
+}
+
+
 /* -------------Gallery--------------- */
 .film-section {
   width: 100%;
