@@ -425,6 +425,7 @@ main {
   transform: translateX(50px);
 }
 
+
 /* -------------Gallery--------------- */
 .film-section {
   width: 100%;
@@ -471,82 +472,224 @@ main {
   100% { transform: translateX(-50%); } /* 한 세트 이동 후 클론이 자연스럽게 이어짐 */
 }
 
-
-/* profile-section: 수평 정렬 및 전체 크기 확대 */
+/* ==============================
+   Profile Section & Intro
+============================== */
 .profile-section {
-  max-width: 1800px;      /* 전체 카드 최대 넓이 확대 */
-  margin: 200px auto;      /* 위아래 여유 증가 */
-  padding: 80px 60px;      /* 카드 내부 여백 확대 */
-  background: linear-gradient(to bottom, #eef6ff, #dffcf1, #ccefff);
-  border-radius: 30px;      /* 모서리 좀 더 둥글게 */
-  box-shadow: 0 16px 32px rgba(0,0,0,0.18); /* 그림자 강조 */
-  will-change: opacity, transform;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
 }
 
-.profile-section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 24px 40px rgba(0,0,0,0.22);
+/* ------------------------------
+   초기 메시지 + 카메라 래퍼
+------------------------------ */
+#introWrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    cursor: pointer;
+    z-index: 20; /* profileCard보다 위 */
+    transition: opacity 0.5s ease;
+}
+#introWrapper.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
-/* 등장 애니메이션 */
+#initialMessage {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #080ce9;
+    margin-bottom: 1rem;
+    white-space: nowrap;
+    display: inline-block;
+    text-align: center;
+    /* 추가: 떠다니는 애니메이션 */
+    animation: float 3s ease-in-out infinite;
+}
+
+/* 카메라 아이콘 */
+#introWrapper .camera {
+    font-size: 3rem;
+    opacity: 1;
+    pointer-events: none;
+    animation: float 4s ease-in-out infinite reverse;
+}
+
+/* ------------------------------
+   셔터 오버레이
+------------------------------ */
+#shutterOverlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 25;
+}
+#shutterOverlay.active {
+    opacity: 1;
+}
+
+/* ------------------------------
+   프로필 카드
+------------------------------ */
+#profileCard {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    max-width: 900px;
+    width: 90%;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    z-index: 10; /* introWrapper 아래 */
+}
+#profileCard.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ------------------------------
+   뒤로가기 버튼
+------------------------------ */
+#backButton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 30;
+}
+#backButton:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+/* 카드 상단 데코 */
+#profileCard::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffecd2);
+    border-radius: 20px 20px 0 0;
+}
+
+/* 프로필 정보 */
+.profile-header {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+#profileImage {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+#profileImage:hover {
+    transform: scale(1.05);
+}
+.profile-info {
+    flex: 1;
+}
+.name {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+}
+.title {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: 1rem;
+}
+.details {
+    display: grid;
+    gap: 0.8rem;
+}
+.detail-item {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    color: #34495e;
+}
+.detail-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    color: #667eea;
+}
+
+/* 취미 */
+.hobbies {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid #ecf0f1;
+}
+.hobbies-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+.hobbies-text {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* 장식 이모지: 비행기 */
+.travel-decoration.plane {
+    top: 20px; right: 30px;
+    font-size: 2rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* 떠다니는 애니메이션 */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* ------------------------------
+   숨김 처리
+------------------------------ */
 .hidden {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
-}
-.show {
-  opacity: 1;
-  transform: translateY(0);
+    display: none !important;
 }
 
-/* 프로필 내 래퍼 */
-.profile-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 60px;             /* 사진과 텍스트 간격 확대 */
-  flex-wrap: wrap;
-  justify-content: center;
-}
 
-/* 사진 크기 및 효과 */
-.profile-wrapper img {
-  width: 700px;           /* 가로 확대 */
-  height: 650px;          /* 세로 확대 */
-  object-fit: cover;
-  border-radius: 50%;
-  border: 5px solid #fff;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  transition: transform 0.3s ease;
-}
-
-.profile-wrapper img:hover {
-  transform: scale(1.05);
-}
-
-/* 텍스트 영역 */
-.profile-text {
-  flex: 1;
-  font-size: 1.6rem;      /* 텍스트 크기 확대 */
-  line-height: 1.8;
-  color: #14151768;
-  text-align: center;
-}
-
-/* 이름 제목 */
-.profile-text h1 {
-  font-family: 'Yuji Syuku', cursive;
-  font-size: 4rem;      /* 제목 크기 확대 */
-  margin-bottom: 16px;
-  text-shadow: 0 3px 6px rgba(0,0,0,0.35);
-}
-
-/* 문단 */
-.profile-text p {
-  font-family: 'Yuji Syuku', cursive;
-  margin-bottom: 20px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.25);
-}
 
 /* ------------------회사 소개--------------------- */
 .company-wrapper {
