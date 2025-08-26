@@ -54,42 +54,60 @@
     </div>
   </div>
 </section>
-
-
-  <!-- 프로필 섹션: 수평 정렬 -->
-<!-- ==============================
-     Profile Section & Intro
-============================== -->
-<section class="profile-section hidden">
+<section class="profile-section">
   <!-- 초기 메시지 + 카메라 아이콘 -->
   <div id="introWrapper">
-    <div id="initialMessage">Click to Start</div>
+    <div id="initialMessage">クリックしてプロフィールを見る</div>
     <div class="travel-decoration camera">📷</div>
   </div>
 
   <!-- 셔터 오버레이 -->
   <div id="shutterOverlay"></div>
+  <audio id="shutterSound" src="sound/shutter.mp3"></audio>
 
   <!-- 프로필 카드 -->
-  <div id="profileCard">
-    <button id="backButton">Back</button>
+  <div id="profileCard" class="profile-card">
+    <!-- 뒤로가기 버튼 -->
+    <button id="backButton">← 戻る</button>
+
+    <!-- 장식 비행기 아이콘 -->
+    <div class="travel-decoration plane">✈️</div>
+
+    <!-- 프로필 정보 -->
     <div class="profile-header">
-      <img id="profileImage" src="images/1.プロフィール_お気に入り_中国にて.jpg" alt="Profile Image">
+      <img id="profileImage" class="profile-image" src="images/1.プロフィール_お気に入り_中国にて.jpg" alt="浅野一之">
       <div class="profile-info">
         <h1 class="name">浅野一之</h1>
         <p class="title">太平洋밸브工業株式会社　代表取締役</p>
         <div class="details">
-          <div class="detail-item"><span class="detail-icon">🎓</span>1990年入社、35年目勤務</div>
-          <div class="detail-item"><span class="detail-icon">🛠️</span>工学部、技術者（開発、設計-自動車部品）</div>
-        </div>
-        <div class="hobbies">
-          <div class="hobbies-title">趣味</div>
-          <div class="hobbies-text">祭りを楽しむこと</div>
+          <div class="detail-item">
+            <span class="detail-icon">🎓</span>
+            <span>工学部</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">💼</span>
+            <span>1990年入社、35年目勤務</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">⚙️</span>
+            <span>技術者（開発、設計-自動車部品）</span>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- 취미 -->
+    <div class="hobbies">
+      <div class="hobbies-title">趣味</div>
+      <div class="hobbies-text">祭りを楽しむこと</div>
+    </div>
   </div>
 </section>
+
+
+
+
+
     <section class="company-introduce">
       <div class="company-wrapper">
         <div class="introduce-text">
