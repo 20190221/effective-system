@@ -52,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const currentSlide = slides[currentIndex];
       backgroundLayer.style.backgroundImage = `url('${currentSlide.image}')`;
 
-      // 텍스트 오버레이: 폰트 크기/줄 높이 유지 + blur/opacity 애니메이션
       textContainer.innerHTML = `
         <h1 class="slide-title" style="
           background: ${currentSlide.gradient};
@@ -100,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function startAutoSlide() {
-    slideInterval = setInterval(nextSlide, 6000); // 사진 변경 속도 느리게
+    slideInterval = setInterval(nextSlide, 6000);
   }
 
   function createDots() {
@@ -184,23 +183,87 @@ document.addEventListener("DOMContentLoaded", () => {
   const sideMenu = document.getElementById("side-menu");
 
   menuToggle.addEventListener("click", () => {
-    menuToggle.classList.toggle("active"); // 버튼 색 변경
-    sideMenu.classList.toggle("open");     // 메뉴 열기/닫기
+    menuToggle.classList.toggle("active");
+    sideMenu.classList.toggle("open");
   });
+
+  // ---------------- 웨이브 커서 ----------------
+  initWaveCursor();
+
+  // ---------------- 초기 메시지 → 셔터 효과 → 프로필 카드 ----------------
+  let hasClicked = false;
+
+  function resetToInitial() {
+    const initialMessage = document.getElementById('initialMessage');
+    const profileCard = document.getElementById('profileCard');
+    const cameraIcon = document.querySelector('.travel-decoration.camera');
+
+    profileCard.classList.remove('show');
+    cameraIcon.classList.remove('hidden');
+
+    setTimeout(() => {
+        initialMessage.classList.remove('hidden');
+        hasClicked = false;
+        document.body.style.cursor = 'pointer';
+    }, 800);
+  }
+
+  document.body.addEventListener('click', function(e) {
+    if (e.target.id === 'backButton') return;
+    if (hasClicked) return;
+    hasClicked = true;
+
+    const initialMessage = document.getElementById('initialMessage');
+    const shutterOverlay = document.getElementById('shutterOverlay');
+    const profileCard = document.getElementById('profileCard');
+    const shutterSound = document.getElementById('shutterSound');
+    const cameraIcon = document.querySelector('.travel-decoration.camera');
+
+    initialMessage.classList.add('hidden');
+    cameraIcon.classList.add('hidden');
+
+    shutterSound.currentTime = 0;
+    shutterSound.play().catch(() => {});
+
+    shutterOverlay.classList.add('active');
+
+    setTimeout(() => {
+        shutterOverlay.classList.remove('active');
+        profileCard.classList.add('show');
+
+        setTimeout(() => {
+            const profileImage = document.getElementById('profileImage');
+            profileImage.src = "images/1.プロフィール_お気に入り_中国にて.jpg";
+        }, 500);
+    }, 300);
+
+    document.body.style.cursor = 'default';
+  });
+
+  document.getElementById('backButton').addEventListener('click', function(e) {
+    e.stopPropagation();
+    resetToInitial();
+  });
+
+  document.body.addEventListener('mousemove', function() {
+    if (!hasClicked) {
+        document.body.style.cursor = 'pointer';
+    }
+  });
+
 });
 
+// ---------------- 웨이브 커서 함수 ----------------
 function initWaveCursor() {
-    document.body.classList.add('wave-cursor');
-    
-    document.addEventListener('click', function(e) {
-        const wave = document.createElement('div');
-        wave.className = 'wave-ring';
-        wave.style.left = e.clientX + 'px';
-        wave.style.top = e.clientY + 'px';
-        document.body.appendChild(wave);
-        
-        setTimeout(() => wave.remove(), 600);
-    });
+  document.body.classList.add('wave-cursor');
+
+  document.addEventListener('click', function(e) {
+    const wave = document.createElement('div');
+    wave.className = 'wave-ring';
+    wave.style.left = e.clientX + 'px';
+    wave.style.top = e.clientY + 'px';
+    document.body.appendChild(wave);
+
+    setTimeout(() => wave.remove(), 600);
+  });
 }
-// 기존 코드 아래에 호출 추가
-initWaveCursor();
