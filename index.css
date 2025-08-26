@@ -12,8 +12,10 @@
 html, body {
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
   font-family: 'Kosugi Maru', cursive;
-  overflow-x: hidden;
+  overflow-x: hidden;  /* 좌우 스크롤 방지 */
 }
 
 body.intro-active {
@@ -314,40 +316,62 @@ main {
 
 /* ------------------본문 콘텐츠--------------------- */
 
+.example-section,
+.slider,
+.slide,
+.background-layer {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
 .example-section {
   position: relative;
   width: 100%;
   height: 100vh;
   overflow: hidden;
   font-family: 'Yuji Syuku', serif;
-  margin: 0;
 }
 
 .background-layer {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0; left: 0; right: 0; bottom: 0; /* 좌우, 상하 꽉 차게 */
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
-  transition: background-image 1.5s ease-in-out;
+  background-repeat: no-repeat;
+  transition: opacity 1.5s ease-in-out;
+  transition: opacity 1.5s ease-in-out; 
   z-index: 0;
+  opacity: 0;
 }
+
+.background-layer.show {
+  opacity: 1;
+  margin: 0; padding: 0;
+}
+
+/* 슬라이드별 배경 이미지 */
+.background-layer.slide-0 { background-image: url('images/retsya1-1.jpg'); }
+.background-layer.slide-1 { background-image: url('images/retsya2-1.jpg'); }
+.background-layer.slide-2 { background-image: url('images/retsya3-2.jpg'); }
 
 .content-layer {
   position: relative;
   z-index: 1;
   height: 100%;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   color: white;
   text-align: left;
-  padding: 240px 240px;
 }
 
 .example-text h1 {
   font-size: 84px;
-  margin-top: 0; /* 상단 여백 제거 */
+  margin-top: 0;
   margin-bottom: 40px;
   font-family: 'Yuji Syuku', serif;
   font-weight: bold;
@@ -417,14 +441,13 @@ main {
 
 /* 왼쪽에서 들어오기 */
 .from-left {
-  transform: translateX(-50px);
+  transform: translateX(0.1px);
 }
 
 /* 오른쪽에서 들어오기 */
 .from-right {
-  transform: translateX(50px);
+  transform: translateX(0.1px);
 }
-
 
 /* -------------Gallery--------------- */
 .film-section {
