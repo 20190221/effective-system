@@ -1,19 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => { 
   const slides = [
     {
-      image: "images/retsya1-1.jpg",
       title: "日本",
       text: "始まった浅野さんのキャリア、その原点とは？",
       gradient: "linear-gradient(90deg, #FFDEE9, #B5FFFC)"
     },
     {
-      image: "images/retsya2-1.jpg",
       title: "中国",
       text: "中国で得た浅野さんの経験、その成長の秘密とは？",
       gradient: "linear-gradient(90deg, #FFB347, #FFCC33)"
     },
     {
-      image: "images/retsya3-2.jpg",
       title: "韓国",
       text: "日本、中国に続いて韓国にやってきた浅野さん。 叶えたい目標は？",
       gradient: "linear-gradient(90deg, #FF5F6D, #FFC371)"
@@ -32,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextBtn = document.querySelector(".slide-btn.next");
 
   body.classList.add("intro-active");
-  slides.forEach(slide => { new Image().src = slide.image; });
+
   backgroundLayer.classList.add("slide-anim", "show");
   textContainer.classList.add("slide-anim", "show");
 
@@ -50,8 +47,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
       const currentSlide = slides[currentIndex];
-      backgroundLayer.style.backgroundImage = `url('${currentSlide.image}')`;
 
+      // -------- CSS 기반 이미지 클래스 적용 --------
+      backgroundLayer.classList.remove("slide-0", "slide-1", "slide-2");
+      backgroundLayer.classList.add(`slide-${currentIndex}`);
+
+      // -------- 텍스트 처리 --------
       textContainer.innerHTML = `
         <h1 class="slide-title" style="
           background: ${currentSlide.gradient};
@@ -135,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
   createDots();
   updateBackground();
 
+  // -------- 이하 기존 기능 그대로 유지 --------
   setTimeout(() => {
     introScreen.classList.add("intro-fade-out");
     body.classList.remove("intro-active");
@@ -250,7 +252,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.cursor = 'pointer';
     }
   });
-
 });
 
 // ---------------- 웨이브 커서 함수 ----------------
