@@ -57,18 +57,39 @@
 
 
   <!-- 프로필 섹션: 수평 정렬 -->
-  <section class="profile-section hidden">
-    <div class="profile-wrapper">
-      <img src="images/1.プロフィール_お気に入り_中国にて.jpg" alt="profile-image">
-      <div class="profile-text">
-        <h1>浅野一之</h1>
-        <p>太平洋밸브工業株式会社　代表取締役</p>
-        <p>1990年入社、35年目勤務</p>
-        <p>工学部、技術者（開発、設計-自動車部品）</p>
-        <p>趣味:祭りを楽しむこと</p>
+<!-- ==============================
+     Profile Section & Intro
+============================== -->
+<section class="profile-section hidden">
+  <!-- 초기 메시지 + 카메라 아이콘 -->
+  <div id="introWrapper">
+    <div id="initialMessage">Click to Start</div>
+    <div class="travel-decoration camera">📷</div>
+  </div>
+
+  <!-- 셔터 오버레이 -->
+  <div id="shutterOverlay"></div>
+
+  <!-- 프로필 카드 -->
+  <div id="profileCard">
+    <button id="backButton">Back</button>
+    <div class="profile-header">
+      <img id="profileImage" src="images/1.プロフィール_お気に入り_中国にて.jpg" alt="Profile Image">
+      <div class="profile-info">
+        <h1 class="name">浅野一之</h1>
+        <p class="title">太平洋밸브工業株式会社　代表取締役</p>
+        <div class="details">
+          <div class="detail-item"><span class="detail-icon">🎓</span>1990年入社、35年目勤務</div>
+          <div class="detail-item"><span class="detail-icon">🛠️</span>工学部、技術者（開発、設計-自動車部品）</div>
+        </div>
+        <div class="hobbies">
+          <div class="hobbies-title">趣味</div>
+          <div class="hobbies-text">祭りを楽しむこと</div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
     <section class="company-introduce">
       <div class="company-wrapper">
         <div class="introduce-text">
