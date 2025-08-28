@@ -527,7 +527,7 @@ main {
 }
 
 #initialMessage {
-    font-size: 2rem;
+    font-size: 4rem;
     font-weight: bold;
     color: #080ce9;
     margin-bottom: 1rem;
@@ -540,10 +540,10 @@ main {
 
 /* 카메라 아이콘 */
 #introWrapper .camera {
-    font-size: 3rem;
+    font-size: 12.5rem;
     opacity: 1;
     pointer-events: none;
-    animation: float 4s ease-in-out infinite reverse;
+    animation: float 3s ease-in-out infinite reverse;
 }
 
 /* ------------------------------
@@ -563,24 +563,48 @@ main {
 #shutterOverlay.active {
     opacity: 1;
 }
-
 /* ------------------------------
    프로필 카드
 ------------------------------ */
 #profileCard {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
-    padding: 3rem;
+    padding: 4rem 3.5rem; /* 상하 여백 더 확보 */
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
-    max-width: 900px;
+    max-width: 1200px;
+    max-height: 1200px;
+    width: 90%;
+    height: 70%;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+}
+#profileCard.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* ------------------------------
+   프로필 카드
+------------------------------ */
+#profileCard {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 4rem 3.5rem; /* 상하 여백 더 확보 */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    max-width: 1600px;
+    max-height: 1200px;
     width: 90%;
     opacity: 0;
     transform: translateY(100px);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    z-index: 10; /* introWrapper 아래 */
+    z-index: 10;
 }
 #profileCard.show {
     opacity: 1;
@@ -592,13 +616,13 @@ main {
 ------------------------------ */
 #backButton {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 24px; /* 살짝 여유 */
+    right: 24px;
     background: rgba(255, 255, 255, 0.9);
     border: none;
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
@@ -616,7 +640,7 @@ main {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 5px;
+    height: 6px;
     background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffecd2);
     border-radius: 20px 20px 0 0;
 }
@@ -624,17 +648,17 @@ main {
 /* 프로필 정보 */
 .profile-header {
     display: flex;
-    gap: 3rem;
+    gap: 3.5rem;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem; /* 하단 여백 넉넉히 */
 }
 #profileImage {
-    width: 200px;
-    height: 200px;
+    width: 440px;
+    height: 440px;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid #fff;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border: 6px solid #fff;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
     transition: transform 0.3s ease;
 }
 #profileImage:hover {
@@ -644,58 +668,60 @@ main {
     flex: 1;
 }
 .name {
-    font-size: 3rem;
+    font-size: 4.5rem;
     font-weight: 700;
     background: linear-gradient(135deg, #667eea, #764ba2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 .title {
-    font-size: 1.2rem;
+    font-size: 2.8rem;
     color: #7f8c8d;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 .details {
     display: grid;
-    gap: 0.8rem;
+    gap: 1.2rem; /* 아이템 사이 간격 확대 */
 }
 .detail-item {
     display: flex;
     align-items: center;
-    font-size: 1.1rem;
+    font-size: 2.4rem; /* 텍스트 크기 키움 */
     color: #34495e;
 }
 .detail-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 12px;
+    width: 32px; /* 아이콘 크기 키움 */
+    height: 32px;
+    margin-right: 16px;
     color: #667eea;
+    flex-shrink: 0;
 }
 
 /* 취미 */
 .hobbies {
-    margin-top: 2rem;
-    padding-top: 2rem;
+    margin-top: 3rem;
+    padding-top: 2.5rem;
     border-top: 2px solid #ecf0f1;
 }
 .hobbies-title {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     color: #2c3e50;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
     display: flex;
     align-items: center;
 }
 .hobbies-text {
-    font-size: 1.2rem;
+    font-size: 2.3rem;
     color: #7f8c8d;
     font-style: italic;
+    line-height: 1.6;
 }
 
 /* 장식 이모지: 비행기 */
 .travel-decoration.plane {
     top: 20px; right: 30px;
-    font-size: 2rem;
+    font-size: 2.5rem; /* 조금 더 키움 */
     animation: float 3s ease-in-out infinite;
 }
 
